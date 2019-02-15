@@ -1,5 +1,5 @@
 <!--
-  Generated template for the SignupPage page.
+  Generated template for the SignUpPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -14,5 +14,36 @@
 
 
 <ion-content padding>
-
+  <form (ngSubmit)="userRegister()">
+    <ion-item>
+      <ion-label>USERNAME</ion-label>
+      <ion-input [(ngModel)]="user.username" type="text" name="username" (keyup)="usernameCheck()"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="userInput">
+      <p style="color: #32db64" *ngIf="userValid" class="error-msg"> Name ok</p>
+      <p style="color: #ca3a11" *ngIf="!userValid" class="error-msg"> Name not ok</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>EMAIL</ion-label>
+      <ion-input [(ngModel)]="user.email" type="text" name="email" (keyup)="emailCheck()"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="emailInput">
+      <p style="color: #32db64" *ngIf="emailValid" class="error-msg"> Email ok</p>
+      <p style="color: #ca3a11" *ngIf="!emailValid" class="error-msg"> Email not ok</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>PASSWORD</ion-label>
+      <ion-input [(ngModel)]="user.password" type="password" name="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>PASSWORD CONFIRM</ion-label>
+      <ion-input [(ngModel)]="verify" type="password" name="secondPassword" (keyup)="passwordCheck()"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="passwordInput">
+      <p style="color: #32db64" *ngIf="passwordValid" class="error-msg"> Password ok</p>
+      <p style="color: #ca3a11" *ngIf="!passwordValid" class="error-msg"> Password does not match</p>
+      <p style="color: #ca3a11" *ngIf="!passwordLengthValid" class="error-msg"> Password length must be greater than 5</p>
+    </ion-item>
+    <button ion-button type="submit" block *ngIf="formValid">Submit</button>
+  </form>
 </ion-content>

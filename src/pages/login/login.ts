@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SignupPage } from '../signup/signup';
+import { SignUpPage } from '../signup/signup';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginResponse } from '../../interfaces/loginResponse'
 import { HomePage } from '../home/home';
@@ -11,7 +11,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  signupPage= SignupPage;
+  signupPage= SignUpPage;
   homePage = HomePage;
 
   constructor(public navCtrl: NavController,

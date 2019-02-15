@@ -8,8 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabspagePage } from '../pages/tabspage/tabspage';
 import { LoginPage } from '../pages/login/login';
-import { SignupPage } from '../pages/signup/signup';
-import { ServerhandlerProvider } from '../providers/serverhandler/serverhandler';
+import { SignUpPage } from '../pages/signup/signup';
 import { AuthProvider } from '../providers/auth/auth';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignUpPage
   ],
   imports: [
     BrowserModule,
@@ -32,13 +31,12 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignUpPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServerhandlerProvider,
     AuthProvider
   ]
 })
