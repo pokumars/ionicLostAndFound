@@ -10,6 +10,8 @@ import { TabspagePage } from '../pages/tabspage/tabspage';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ServerhandlerProvider } from '../providers/serverhandler/serverhandler';
+import { AuthProvider } from '../providers/auth/auth';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { ServerhandlerProvider } from '../providers/serverhandler/serverhandler'
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +38,8 @@ import { ServerhandlerProvider } from '../providers/serverhandler/serverhandler'
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServerhandlerProvider
+    ServerhandlerProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

@@ -9,7 +9,8 @@ import { LoginPage } from '../pages/login/login';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage; // landing page should be login until the person does sign in
+  // rootPage:any = HomePage;
+  rootPage:any = LoginPage; // loginPage should be the root page until user is logged in
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
