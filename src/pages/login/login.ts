@@ -22,6 +22,11 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
+  // In next update
+  // add smth that lets user know that the password/email is wrong
+
+
+
   onLogin(form) {
     console.log(form.value)
     this.authProvider.login(form.value.username, form.value.password)
