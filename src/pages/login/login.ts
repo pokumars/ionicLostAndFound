@@ -4,6 +4,7 @@ import { SignUpPage } from '../signup/signup';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginResponse } from '../../interfaces/loginResponse'
 import { HomePage } from '../home/home';
+import { TabspagePage } from '../tabspage/tabspage';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class LoginPage {
       localStorage.setItem('email', response.user.email);
       localStorage.setItem('user_id', response.user.user_id.toString());
 
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(TabspagePage);
 
 
     },error => console.log('yeeeee man this be da error', error));
