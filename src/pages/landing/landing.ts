@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { TabspagePage } from "../tabspage/tabspage";
 
 /**
  * Generated class for the LandingPage page.
@@ -30,7 +31,12 @@ export class LandingPage {
     setTimeout(() => {
       initSpinner.dismiss().catch(error => console.log(error));
       console.log('timeout');
-      this.navCtrl.push(LoginPage).catch(err => console.log(err));
+      if (localStorage.getItem('token') ) {
+        this.navCtrl.push(TabspagePage).catch(err => console.log(err));
+      } else {
+        this.navCtrl.push(LoginPage).catch(err => console.log(err));
+      }
+
     }, 300)
   }
 
