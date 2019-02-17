@@ -13,19 +13,24 @@ import { TabspagePage } from '../pages/tabspage/tabspage';
 import { LoginPage } from '../pages/login/login';
 import { SignUpPage } from '../pages/signup/signup';
 import { AuthProvider } from '../providers/auth/auth';
+import { MediaProvider } from '../providers/media/media';
+import { PipesModule } from '../pipes/pipes.module';
+import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 
 @NgModule({
   declarations: [
     TabspagePage,
     MyApp,
     LoginPage,
-    SignUpPage
+    SignUpPage,
+    ThumbnailPipe
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    HomePageModule
+    HomePageModule,
+    // PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,7 +44,8 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    MediaProvider
   ]
 })
 export class AppModule {}
