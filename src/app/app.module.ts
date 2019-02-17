@@ -23,7 +23,7 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
     MyApp,
     LoginPage,
     SignUpPage,
-    ThumbnailPipe
+    // ThumbnailPipe
   ],
   imports: [
     BrowserModule,

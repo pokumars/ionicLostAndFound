@@ -49,7 +49,7 @@ export class ProfilePage {
           this.avatar = a.filename;
           //this.avatarUrl = this.baseUrl + this.avatar;
           console.log('a.filename is ', a.filename);
-          /**This next line is necessary since the pipe doesnt work. I basically made the pipe in here */
+
           this.avatarUrl = a.filename.split(".")[0] + '-tn160.' +'png';
         }
       })

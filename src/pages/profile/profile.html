@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>profile</ion-title>
     <ion-buttons end>
-      <button ion-button outline (click)="onLogout()">Logout</button>
+      <button ion-button solid color="danger" (click)="onLogout()">Logout</button>
     </ion-buttons>
   </ion-navbar>
 
@@ -13,12 +13,11 @@
 <ion-content padding>
     <ion-avatar >
       <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
-      <img [src]="baseUrl + avatarUrl"><!-- This is temporary fix for the pipe not working -->
+      <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
 
 
-      <!-- DOESNT WORK."pipe could not be found" <img [src]="baseUrl +( avatar | thumbnail: 'small')"> -->
+      <img [src]="baseUrl +( avatar | thumbnail: 'small')">
     </ion-avatar>
-      <p>{{ avatarUrl }}</p>
       <p>{{ userMail }}</p>
       <p>{{ username }}</p>
 
