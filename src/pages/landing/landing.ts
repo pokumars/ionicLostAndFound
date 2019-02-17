@@ -36,7 +36,6 @@ export class LandingPage {
       } else {
         this.navCtrl.push(LoginPage).catch(err => console.log(err));
       }
-
     }, 300)
   }
 

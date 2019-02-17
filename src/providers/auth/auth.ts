@@ -16,6 +16,7 @@ export class AuthProvider {
   constructor(public http: HttpClient) {
     console.log('Hello AuthProvider Provider');
   }
+  // ------------------------- concerning users -------------------------------
   // for logging in
   login(username: string, password: string): Observable<any> {
     const body ={
@@ -24,8 +25,6 @@ export class AuthProvider {
     };
     return this.http.post(this.baseUrl+ '/login', body);
   }
-
-
   // check user name existence
   checkUsername(input: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + '/users/username/' + input);

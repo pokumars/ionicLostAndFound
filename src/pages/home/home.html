@@ -7,12 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>home</ion-title>
+    <button *ngIf="lost" (click)="goToOtherPage()">Go To Found Page</button>
+    <button *ngIf="!lost" (click)="goToOtherPage()">Go To Lost Page</button>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <div *ngIf="lost">Lost</div>
+  <div *ngIf="!lost">Found</div>
 </ion-content>
