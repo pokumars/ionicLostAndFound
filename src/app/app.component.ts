@@ -5,12 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { LandingPage } from '../pages/landing/landing';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage:any = HomePage;
-  rootPage:any = LoginPage; // loginPage should be the root page until user is logged in
+  rootPage:any = LandingPage; // is the page user gonna see first, to display logo
+  // rootPage:any = LoginPage; // loginPage should be the root page until user is logged in
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
