@@ -6,8 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageModule } from '../pages/home/home.module';
-
-
+import { Chooser } from '@ionic-native/chooser';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 
@@ -20,6 +20,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { MediaProvider } from '../providers/media/media';
 import { PipesModule } from '../pipes/pipes.module';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
+import { UploadPage } from '../pages/upload/upload';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
     MyApp,
     LoginPage,
     SignUpPage,
-    LandingPage
+    LandingPage,
+    UploadPage
     // ThumbnailPipe
   ],
   imports: [
@@ -44,14 +46,17 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
     HomePage,
     LoginPage,
     SignUpPage,
-    LandingPage
+    LandingPage,
+    UploadPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    MediaProvider
+    MediaProvider,
+    Chooser,
+    Camera
   ]
 })
 export class AppModule {}

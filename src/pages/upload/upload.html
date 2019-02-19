@@ -1,0 +1,54 @@
+<!--
+  Generated template for the UploadPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>upload</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p> {{filename}} </p>
+  <form (ngSubmit)="uploadFile()">
+    <ion-item *ngIf="isWindows">
+      <ion-input type="file" (change)="checkFile($event)"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isAndroid">
+      <button type="button" (click)="choose()">Choose</button>
+    </ion-item>
+    <ion-item *ngIf="isAndroid">
+      <button type="button" (click)="takePic()">Take pic</button>
+    </ion-item>
+    <ion-item *ngIf="fileInput">
+      <p style="color: #32db64" *ngIf="fileValid" class="error-msg"> File ok</p>
+      <p style="color: #ca3a11" *ngIf="!fileValid" class="error-msg"> File type not ok</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>TITLE</ion-label>
+      <ion-input [(ngModel)]="title" type="text" name="title" (keyup)="checkTitle()"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>DESCRIPTION</ion-label>
+      <ion-textarea [(ngModel)]="description" type="text" name="description" (keyup)="checkDesc()"></ion-textarea>
+    </ion-item>
+    <ion-list radio-group [(ngModel)]="choice" name="choice" (ionChange)="checkChoice()">
+      <ion-label>What is the nature of the post?</ion-label>
+      <ion-item>
+        <ion-label>I lost something.</ion-label>
+        <ion-radio value="lost"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>I found something.</ion-label>
+        <ion-radio value="found"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button ion-button type="submit" block *ngIf="fileValid&&titleValid&&descriptionValid">Post</button>
+  </form>
+  <img *ngIf="isImage" [src]="pathToFile" [ngStyle]="{'filter': 'brightness(' + brightness + '%) contrast(' + contrast + '%) saturate(' + saturation + '%) sepia(' + sepia + '%) url(#'+ filter + ')'}" alt="Jace Beleren">
+  <img *ngIf="isAudio||isVideo" src="https://upload.wikimedia.org/wikipedia/en/d/d1/Bayonetta_Bayo2_render.png" alt="Bayonetta">
+
+</ion-content>

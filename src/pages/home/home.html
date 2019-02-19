@@ -9,12 +9,24 @@
   <ion-navbar>
     <button *ngIf="lost" (click)="goToOtherPage()">Go To Found Page</button>
     <button *ngIf="!lost" (click)="goToOtherPage()">Go To Lost Page</button>
+    <button (click)="goToUpload()">Go To Upload Page</button>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let image of picArray | async" >
+      <ion-thumbnail item-start>
+        <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + (image.filename | thumbnail: 'small')" [alt]="image.description">
+      </ion-thumbnail>
+      <h2>{{ image.title }}</h2>
+      <p>{{ image.description }}</p>
+      <p>{{ image.time_added | date}}</p>
+      <!--<button ion-button clear item-end (click)="onCatClick(image)">View</button>-->
+    </ion-item>
+  </ion-list>
   <div *ngIf="lost">Lost</div>
   <div *ngIf="!lost">Found</div>
 </ion-content>
