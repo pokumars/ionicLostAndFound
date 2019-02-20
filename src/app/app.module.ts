@@ -21,6 +21,7 @@ import { MediaProvider } from '../providers/media/media';
 import { PipesModule } from '../pipes/pipes.module';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import { UploadPage } from '../pages/upload/upload';
+import { PostPage } from '../pages/post/post';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UploadPage } from '../pages/upload/upload';
     LoginPage,
     SignUpPage,
     LandingPage,
-    UploadPage
+    UploadPage,
+    PostPage
     // ThumbnailPipe
   ],
   imports: [
@@ -47,7 +49,8 @@ import { UploadPage } from '../pages/upload/upload';
     LoginPage,
     SignUpPage,
     LandingPage,
-    UploadPage
+    UploadPage,
+    PostPage
   ],
   providers: [
     StatusBar,

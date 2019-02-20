@@ -4,6 +4,7 @@ import { UploadPage } from '../upload/upload';
 import { Observable } from "rxjs";
 import { Pic } from "../../interfaces/Pic";
 import { MediaProvider } from '../../providers/media/media';
+import {PostPage} from "../post/post";
 
 @IonicPage()
 @Component({
@@ -42,5 +43,9 @@ export class HomePage {
       this.picArray = this.mediaProvider.getAllMedia('found');
     }
     this.picArray.subscribe(res => console.log(res));
+  }
+  // go to detailed post
+  goToDetailed(post: Pic) {
+    this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
 }
