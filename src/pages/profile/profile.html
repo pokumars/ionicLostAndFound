@@ -14,7 +14,7 @@
     <ion-avatar >
       <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
       <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
-      <img [src]="baseUrl +( avatar | thumbnail: 'small')">
+      <p> {{avatar | user}}"<p>
     </ion-avatar>
       <p>{{ userMail }}</p>
       <p>{{ username }}</p>

@@ -1,5 +1,7 @@
 {
   "name": "lostnfound",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

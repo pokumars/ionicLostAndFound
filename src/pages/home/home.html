@@ -17,11 +17,12 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let image of picArray | async" (click)="goToDetailed(image)">
+    <ion-item *ngFor="let image of picArray | async">
       <ion-thumbnail item-start>
-        <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + (image.filename | thumbnail: 'small')" [alt]="image.description">
+        <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'" [alt]="image.description" (click)="goToDetailed(image)">
       </ion-thumbnail>
       <h2>{{ image.title }}</h2>
+      <h5>{{image.user_id | user}}</h5>
       <p>{{ image.description }}</p>
       <p>{{ image.time_added | date}}</p>
       <!--<button ion-button clear item-end (click)="onCatClick(image)">View</button>-->

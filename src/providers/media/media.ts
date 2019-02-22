@@ -41,4 +41,25 @@ export class MediaProvider {
   getAllMedia(type: string): Observable<Pic[]> {
     return this.http.get<Pic[]>(this.baseUrl + 'tags/' + type);
   }
+  // send comment
+  sendComment(comment: string, file_id: number): Observable<any> {
+    let token = localStorage.getItem('token');
+    return this.http.post(this.baseUrl + 'comments', {
+      "file_id": file_id,
+      "comment": comment
+    },{
+      headers: { 'x-access-token': token }
+    });
+  }
+  // get comments
+  getComment(file_id: number): Observable<any> {
+    return this.http.get(this.baseUrl + 'comments/file/' + file_id);
+  }
+  // get user data
+  getUserData(id: number): Observable<any> {
+    let token = localStorage.getItem('token');
+    return this.http.post(this.baseUrl + 'users/' + id, {
+      headers: { 'x-access-token': token }
+    });
+  }
 }

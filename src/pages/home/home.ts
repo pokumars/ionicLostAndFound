@@ -4,7 +4,7 @@ import { UploadPage } from '../upload/upload';
 import { Observable } from "rxjs";
 import { Pic } from "../../interfaces/Pic";
 import { MediaProvider } from '../../providers/media/media';
-import {PostPage} from "../post/post";
+import { PostPage } from "../post/post";
 
 @IonicPage()
 @Component({
@@ -23,7 +23,7 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
     this.getAllFile();
   }
-  ionViewwillEnter() {
+  ionViewWillEnter() {
     this.getAllFile();
   }
   // to navigate lost and found page

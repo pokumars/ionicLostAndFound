@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ProfilePage } from './profile';
-import { ThumbnailPipe } from '../../pipes/thumbnail/thumbnail';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
     ProfilePage,
-    ThumbnailPipe,
   ],
   imports: [
     IonicPageModule.forChild(ProfilePage),
+    PipesModule
   ],
 })
 export class ProfilePageModule {}

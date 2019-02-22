@@ -15,8 +15,8 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class TabspagePage {
 
-  homeRoot = 'HomePage'
-  profileRoot = 'ProfilePage'
+  homeRoot = 'HomePage';
+  profileRoot = 'ProfilePage';
 
 
   constructor(public navCtrl: NavController) {}

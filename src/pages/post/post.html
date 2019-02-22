@@ -1,18 +1,20 @@
-<!--
-  Generated template for the PostPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>post</ion-title>
   </ion-navbar>
-
 </ion-header>
+<ion-content padding *ngIf="post">
+  <h2>{{ post.title }}</h2>
+  <p style="font-size: smaller">{{ post.time_added | date}}</p>
+  <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + post.filename.split('.')[0] + '-tn320.png'" [alt]="post.title">
+  <p>{{ post.description }}</p>
+  <label>Comments</label>
+  <ion-textarea [(ngModel)]="comment"></ion-textarea>
+  <button ion-button *ngIf="comment!==''" (click)="sendComment()">send</button>
 
-
-<ion-content padding>
-
+  <ion-list *ngIf="comments.length !== 0">
+    <ion-item *ngFor="let cm of comments">
+      <p>{{cm.comment}}</p>
+      <p>{{cm.time_added}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -5,47 +5,44 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { HttpClientModule } from '@angular/common/http';
-import { HomePageModule } from '../pages/home/home.module';
 import { Chooser } from '@ionic-native/chooser';
 import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 
-import { HomePage } from '../pages/home/home';
 import { TabspagePage } from '../pages/tabspage/tabspage';
 import { LoginPage } from '../pages/login/login';
 import { SignUpPage } from '../pages/signup/signup';
 import { LandingPage } from '../pages/landing/landing';
 import { AuthProvider } from '../providers/auth/auth';
 import { MediaProvider } from '../providers/media/media';
-import { PipesModule } from '../pipes/pipes.module';
-import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import { UploadPage } from '../pages/upload/upload';
 import { PostPage } from '../pages/post/post';
+// pipe
+import { PipesModule } from '../pipes/pipes.module';
+import { UserPipe } from '../pipes/user/user';
+import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
+
 
 @NgModule({
   declarations: [
-    TabspagePage,
     MyApp,
+    TabspagePage,
     LoginPage,
     SignUpPage,
     LandingPage,
     UploadPage,
-    PostPage
-    // ThumbnailPipe
+    PostPage,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
     HttpClientModule,
-    HomePageModule,
-    // PipesModule,
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     TabspagePage,
     MyApp,
-    HomePage,
     LoginPage,
     SignUpPage,
     LandingPage,
@@ -55,11 +52,11 @@ import { PostPage } from '../pages/post/post';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     MediaProvider,
     Chooser,
-    Camera
+    Camera,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}
