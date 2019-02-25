@@ -47,6 +47,7 @@ export class ProfilePage {
 
           // use the filename of that as the file name to be passed to html.
           this.avatar = a.filename;
+          console.log('avatar ---->', this.avatar)
           //this.avatarUrl = this.baseUrl + this.avatar;
           console.log('a.filename is ', a.filename);
 
