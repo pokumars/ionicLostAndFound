@@ -84,4 +84,24 @@ export class MediaProvider {
       });
     });
   }
+  // get profile pic id
+  getProfilePicName(id: number) {
+    console.log('userid: ' + id);
+    return new Promise(resolve => {
+      this.http.get<Pic[]>(this.baseUrl + 'tags/profile').subscribe(res => {
+        console.log('xxxxxxxxxxxxxxxxx');
+        console.log(res);
+        res.forEach(pic => {
+          if (pic.user_id === id) {
+            console.log(pic.user_id);
+            resolve(pic.filename);
+          }
+        });
+      });
+    });
+  }
+  // get a single file's detail with all the thumbnails info available
+  getSingleMedia(id: number): Observable<Pic> {
+    return this.http.get<Pic>(this.baseUrl + 'media/' + id);
+  }
 }

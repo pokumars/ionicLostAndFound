@@ -13,6 +13,11 @@ export class UserPipe implements PipeTransform {
   constructor(private mediaProvider: MediaProvider) {  }
 
   transform(id: number, type: string) {
-    return this.mediaProvider.getUserDetail(id, type);
+    if(type === 'avatar'){
+      return this.mediaProvider.getProfilePicName(id);
+    } else {
+      return this.mediaProvider.getUserDetail(id, type);
+    }
+
   }
 }
