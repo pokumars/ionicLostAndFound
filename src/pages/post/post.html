@@ -4,6 +4,7 @@
 </ion-header>
 <ion-content padding *ngIf="post">
   <h2>{{ post.title }}</h2>
+  <h5>{{ post.user_id | userInfo: 'name' | async }}</h5>
   <p style="font-size: smaller">{{ post.time_added | date}}</p>
   <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + post.filename.split('.')[0] + '-tn320.png'" [alt]="post.title">
   <p>{{ post.description }}</p>
@@ -13,8 +14,9 @@
 
   <ion-list *ngIf="comments.length !== 0">
     <ion-item *ngFor="let cm of comments">
+      <h4>{{cm.user_id}}</h4>
       <p>{{cm.comment}}</p>
-      <p>{{cm.time_added}}</p>
+      <p style="font-size: x-small">{{cm.time_added}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

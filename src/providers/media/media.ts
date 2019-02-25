@@ -58,8 +58,30 @@ export class MediaProvider {
   // get user data
   getUserData(id: number): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.post(this.baseUrl + 'users/' + id, {
+    return this.http.get(this.baseUrl + 'users/' + id, {
       headers: { 'x-access-token': token }
+    });
+  }
+  // get user's certain details
+  getUserDetail(id: number, type?: string) {
+    return new Promise(resolve => {
+      this.getUserData(id).subscribe(res => {
+        console.log(res);
+        switch (type) {
+          case 'name':
+            resolve(res.username);
+            break;
+          case 'email':
+            resolve(res.email);
+            break;
+          case 'full':
+            resolve(res.full_name);
+            break;
+          default:
+            resolve(res);
+            break;
+        }
+      });
     });
   }
 }

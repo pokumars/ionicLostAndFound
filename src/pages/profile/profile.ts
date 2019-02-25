@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
-import {LoginPage} from "../login/login";
+import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 import { MediaProvider } from '../../providers/media/media';
 import { TagsResponse } from '../../interfaces/Pic';
 

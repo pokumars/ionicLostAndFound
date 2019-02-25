@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { MediaProvider } from '../../providers/media/media';
 
 /**
  * Generated class for the UserPipe pipe.
@@ -6,10 +7,12 @@ import { Pipe, PipeTransform } from '@angular/core';
  * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
  */
 @Pipe({
-  name: 'user',
+  name: 'userInfo',
 })
 export class UserPipe implements PipeTransform {
-  transform(value: string) {
-    return value + 'xxxx';
+  constructor(private mediaProvider: MediaProvider) {  }
+
+  transform(id: number, type: string) {
+    return this.mediaProvider.getUserDetail(id, type);
   }
 }
