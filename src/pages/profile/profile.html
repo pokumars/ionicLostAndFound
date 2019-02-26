@@ -12,7 +12,6 @@
 
 <ion-content padding>
     <ion-avatar >
-      <img [src]="baseUrl + avatar">
       <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
       <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
       <img [src]="baseUrl +( avatar | thumbnail: 'medium')">

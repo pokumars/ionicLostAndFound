@@ -7,8 +7,8 @@
 <ion-header>
 
   <ion-navbar>
-    <button *ngIf="lost" (click)="goToOtherPage()">Go To Found Page</button>
-    <button *ngIf="!lost" (click)="goToOtherPage()">Go To Lost Page</button>
+    <button ion-button solid  *ngIf="lost" (click)="goToOtherPage()">Go To Found Page</button>
+    <button ion-button solid  *ngIf="!lost" (click)="goToOtherPage()">Go To Lost Page</button>
     <button (click)="goToUpload()">Go To Upload Page</button>
   </ion-navbar>
 
