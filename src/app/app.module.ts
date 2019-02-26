@@ -20,7 +20,7 @@ import { UploadPage } from '../pages/upload/upload';
 import { PostPage } from '../pages/post/post';
 // pipe
 import { PipesModule } from '../pipes/pipes.module';
-import { UserPipe } from '../pipes/user/user';
+import { UserPipe } from '../pipes/user/user-info';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 
 
@@ -32,12 +32,13 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
     SignUpPage,
     LandingPage,
     UploadPage,
-    PostPage,
+    PostPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

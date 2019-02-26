@@ -58,8 +58,50 @@ export class MediaProvider {
   // get user data
   getUserData(id: number): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.post(this.baseUrl + 'users/' + id, {
+    return this.http.get(this.baseUrl + 'users/' + id, {
       headers: { 'x-access-token': token }
     });
+  }
+  // get user's certain details
+  getUserDetail(id: number, type?: string) {
+    return new Promise(resolve => {
+      this.getUserData(id).subscribe(res => {
+        console.log(res);
+        switch (type) {
+          case 'name':
+            resolve(res.username);
+            break;
+          case 'email':
+            resolve(res.email);
+            break;
+          case 'full':
+            resolve(res.full_name);
+            break;
+          default:
+            resolve(res);
+            break;
+        }
+      });
+    });
+  }
+  // get profile pic id
+  getProfilePicName(id: number) {
+    console.log('userid: ' + id);
+    return new Promise(resolve => {
+      this.http.get<Pic[]>(this.baseUrl + 'tags/profile').subscribe(res => {
+        console.log('xxxxxxxxxxxxxxxxx');
+        console.log(res);
+        res.forEach(pic => {
+          if (pic.user_id === id) {
+            console.log(pic.user_id);
+            resolve(pic.filename);
+          }
+        });
+      });
+    });
+  }
+  // get a single file's detail with all the thumbnails info available
+  getSingleMedia(id: number): Observable<Pic> {
+    return this.http.get<Pic>(this.baseUrl + 'media/' + id);
   }
 }
