@@ -22,6 +22,7 @@ import { PostPage } from '../pages/post/post';
 import { PipesModule } from '../pipes/pipes.module';
 import { UserPipe } from '../pipes/user/user-info';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
+import {ProfileEditPage} from "../pages/profile-edit/profile-edit";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
     SignUpPage,
     LandingPage,
     UploadPage,
-    PostPage
+    PostPage,
+    ProfileEditPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
     SignUpPage,
     LandingPage,
     UploadPage,
-    PostPage
+    PostPage,
+    ProfileEditPage
   ],
   providers: [
     StatusBar,

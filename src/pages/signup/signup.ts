@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
-import {User} from "../../interface/user";
+import { User } from "../../interface/user";
+import { TabspagePage } from "../tabspage/tabspage";
 
 
 /**
@@ -41,11 +42,16 @@ export class SignUpPage {
     console.log('new user');
     this.authProvider.registerUser(this.user).subscribe(response => {
       console.log(response);
-      this.authProvider.login( this.user.username,  this.user.password ).subscribe(res => {
-        if (res.message === 'Logged in successfully') {
+      this.authProvider.login( this.user.username,  this.user.password ).subscribe(response => {
+        if (response.message === 'Logged in successfully') {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('username', response.user.username);
+          localStorage.setItem('email', response.user.email);
+          localStorage.setItem('user_id', response.user.user_id.toString());
           console.log('uhuh!!!!');
-          //this.authProvider.rememberToken(res.token);
-          this.navCtrl.parent.select(0);
+          this.navCtrl.setRoot(TabspagePage).catch((err)=>{
+            console.log(err)
+          });
         } else {
           console.log('nooooooo');
         }

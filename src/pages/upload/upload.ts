@@ -97,7 +97,7 @@ export class UploadPage {
   }
   // check file using chooser
   choose() {
-    this.chooser.getFile('image/audio/video').then(res => {
+    this.chooser.getFile('image/*,audio/*,video/*').then(res => {
       this.fileInput = true;
       console.log(res);
       this.filename = res.name;

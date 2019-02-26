@@ -2,6 +2,7 @@
 
   <ion-navbar>
     <ion-title>profile</ion-title>
+    <button (click)="editProfile()">Edit Profile</button>
     <ion-buttons end>
       <button ion-button solid color="danger" (click)="onLogout()">Logout</button>
     </ion-buttons>
@@ -18,5 +19,4 @@
     </ion-avatar>
       <p>{{ userId | userInfo: 'name' | async }}</p>
       <p>{{ userMail }}</p>
-
 </ion-content>

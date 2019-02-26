@@ -25,7 +25,6 @@ export class LoginPage {
   }
   // In next update
   // add smth that lets user know that the password/email is wrong
-
   onLogin(form) {
     console.log(form.value);
     this.authProvider.login(form.value.username, form.value.password)
@@ -34,11 +33,9 @@ export class LoginPage {
       localStorage.setItem('token', response.token);
       localStorage.setItem('username', response.user.username);
       localStorage.setItem('email', response.user.email);
+      localStorage.setItem('password', form.value.password);
       localStorage.setItem('user_id', response.user.user_id.toString());
-
       this.navCtrl.setRoot(TabspagePage).catch(err => console.log(err));
-
-
     },error => console.log('yeeeee man this be da error', error));
   }
 

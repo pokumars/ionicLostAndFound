@@ -1,0 +1,60 @@
+<!--
+  Generated template for the ProfileEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>profileEdit</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="modifyUser()" *ngIf="!confirmationCheck">
+    <ion-item>
+      <ion-label>USERNAME</ion-label>
+      <ion-input [(ngModel)]="user.username" type="text" name="username" (keyup)="usernameCheck()"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="user.username !== ''">
+      <p style="color: #32db64" *ngIf="userValid" class="error-msg"> Name ok</p>
+      <p style="color: #ca3a11" *ngIf="!userValid" class="error-msg"> Name not ok</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>EMAIL</ion-label>
+      <ion-input [(ngModel)]="user.email" type="text" name="email" (keyup)="emailCheck()"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="user.email !== ''">
+      <p style="color: #32db64" *ngIf="emailValid" class="error-msg"> Email ok</p>
+      <p style="color: #ca3a11" *ngIf="!emailValid" class="error-msg"> Email not ok</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>PASSWORD</ion-label>
+      <ion-input [(ngModel)]="user.password" type="password" name="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="user.password !== '' && user.password.length >= 5">
+      <ion-label>CONFIRM NEW PASSWORD</ion-label>
+      <ion-input [(ngModel)]="verify" type="password" name="password" (keyup)="passwordCheck()"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="user.password !== ''">
+      <p style="color: #32db64" *ngIf="passwordValid&&user.password.length>=5" class="error-msg"> Password ok</p>
+      <p style="color: #ca3a11" *ngIf="!passwordValid" class="error-msg"> Password not ok</p>
+      <p style="color: #ca3a11" *ngIf="user.password.length < 5" class="error-msg"> Password length mush be greater than 5</p>
+    </ion-item>
+    <button ion-button type="submit" block *ngIf="formValid">Submit</button>
+  </form>
+  <form *ngIf="confirmationCheck" (ngSubmit)="confirmSentData()">
+    <ion-item>
+      <ion-label>Type your old password to confirm</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input #trydis [(ngModel)]="oldPassword" type="password" name="password"></ion-input>
+    </ion-item>
+    <ion-item></ion-item>
+    <button ion-button type="submit" block>Confirm</button>
+    <button ion-button block (click)="cancelConfirm()">Cancel</button>
+  </form>
+</ion-content>
