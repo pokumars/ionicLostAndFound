@@ -22,17 +22,25 @@ import { PostPage } from '../pages/post/post';
 import { PipesModule } from '../pipes/pipes.module';
 import { UserPipe } from '../pipes/user/user-info';
 import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
+import { LostPage } from '../pages/lost/lost';
+import { FoundPage } from '../pages/found/found';
+import { Tabs2Page } from '../pages/tabs2/tabs2';
+import { ProfilePage } from '../pages/profile/profile';
 
 
 @NgModule({
   declarations: [
     MyApp,
     TabspagePage,
+    Tabs2Page,
     LoginPage,
     SignUpPage,
     LandingPage,
     UploadPage,
-    PostPage
+    PostPage,
+    LostPage,
+    FoundPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -43,12 +51,16 @@ import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
   bootstrap: [IonicApp],
   entryComponents: [
     TabspagePage,
+    Tabs2Page,
     MyApp,
     LoginPage,
     SignUpPage,
     LandingPage,
     UploadPage,
-    PostPage
+    PostPage,
+    LostPage,
+    FoundPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
