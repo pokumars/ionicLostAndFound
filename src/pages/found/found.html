@@ -27,5 +27,20 @@
 
 
 <ion-content padding>
+    <div *ngIf="!lost">Found</div>
+
+    <ion-list>
+        <ion-item *ngFor="let image of picArray | async">
+          <ion-thumbnail item-start>
+            <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+             [alt]="image.description" (click)="goToDetailed(image)">
+          </ion-thumbnail>
+          <h1>{{ image.title }}</h1>
+          <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+          <p>{{ image.description }}</p>
+          <p>{{ image.time_added | date}}</p>
+          <!--<button ion-button clear item-end (click)="onCatClick(image)">View</button>-->
+        </ion-item>
+      </ion-list>
 
 </ion-content>
