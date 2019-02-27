@@ -5,9 +5,9 @@
 <ion-content padding *ngIf="post">
   <h2>{{ post.title }}</h2>
   <h5>{{ post.user_id | userInfo: 'name' | async }}</h5>
-  <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + (post.user_id | userInfo: 'avatar' | async | thumbnail: 'small')" style="width: 32px;">
+  <img [src]="(post.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 40px;">
   <p style="font-size: smaller">{{ post.time_added | date}}</p>
-  <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + post.filename.split('.')[0] + '-tn320.png'" [alt]="post.title">
+  <img [src]="(post.filename | thumbnail: 'medium')" [alt]="post.title">
   <p>{{ post.description }}</p>
   <label>Comments</label>
   <ion-textarea [(ngModel)]="comment"></ion-textarea>
@@ -15,7 +15,7 @@
 
   <ion-list *ngIf="comments.length !== 0">
     <ion-item *ngFor="let cm of comments">
-      <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + (cm.user_id | userInfo: 'avatar' | async | thumbnail: 'small')" style="width: 16px;">
+      <img [src]="(cm.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 20px;">
       <h4 style="color: lightpink">{{ cm.user_id | userInfo: 'name' | async }}</h4>
       <p>{{ cm.comment }}</p>
       <p style="font-size: 3px">{{cm.time_added}}</p>

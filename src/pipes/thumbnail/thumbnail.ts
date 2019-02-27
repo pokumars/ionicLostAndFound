@@ -36,6 +36,6 @@ export class ThumbnailPipe implements PipeTransform {
         thumbnail = fileName + '-tn160.' +'png';
         break;
     }
-    return thumbnail;
+    return 'http://media.mw.metropolia.fi/wbma/uploads/' + thumbnail;
   }
 }

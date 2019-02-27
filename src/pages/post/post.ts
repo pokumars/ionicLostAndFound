@@ -26,6 +26,7 @@ export class PostPage {
 
   ionViewDidLoad() {
     this.post = this.navParams.get('post');
+    console.log(this.post);
     console.log('ionViewDidLoad PostPage');
     this.getComments();
   }

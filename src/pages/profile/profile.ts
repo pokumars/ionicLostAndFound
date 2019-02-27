@@ -22,7 +22,7 @@ import { LoadingController } from 'ionic-angular';
 })
 export class ProfilePage {
   baseUrl = 'https://media.mw.metropolia.fi/wbma/uploads/';
-  userId = '';
+  userId: number;
   username = '';
   userMail = '';
   avatar = '';
@@ -53,35 +53,36 @@ export class ProfilePage {
   }
   ionViewWillEnter() {
     this.updateUserData();
-    this.getProfilePic();
+    console.log('user id is: ' + this.userId);
+    // this.getProfilePic();
   }
   // update data
   updateUserData() {
-    this.userId = localStorage.getItem('user_id');
+    this.userId = +localStorage.getItem('user_id');// the plus to convert userid to number to be used in user info pipe
     this.username = localStorage.getItem('username');
     this.userMail = localStorage.getItem('email');
   }
   //get profile pic
-  getProfilePic() {
-    this.mediaProvider.getAvatar('profile').subscribe((item: TagsResponse[]) => {
-      // gets back an array of all items with the tag 'profile'.
-      item.filter((a) => {
-        // search the array for the specific one that has my userId
-        if (a.user_id.toString() === this.userId){
-          // use the filename of that as the file name to be passed to html.
-          this.avatarId = a.file_id;
-          this.avatar = a.filename;
-          console.log('avatar ---->', this.avatar)
-          //this.avatarUrl = this.baseUrl + this.avatar;
-          console.log('a.filename is ', a.filename);
-          this.avatarUrl = a.filename.split(".")[0] + '-tn160.' +'png';
-        }
-        else {
-          this.avatar = '62b4a67c2d87d891a6eae477866320d6.png';
-        }
-      })
-    }, error => console.log(error))
-  }
+  // getProfilePic() {
+  //   this.mediaProvider.getAvatar('profile').subscribe((item: TagsResponse[]) => {
+  //     // gets back an array of all items with the tag 'profile'.
+  //     item.filter((a) => {
+  //       // search the array for the specific one that has my userId
+  //       if (a.user_id.toString() === this.userId){
+  //         // use the filename of that as the file name to be passed to html.
+  //         this.avatarId = a.file_id;
+  //         this.avatar = a.filename;
+  //         console.log('avatar ---->', this.avatar);
+  //         //this.avatarUrl = this.baseUrl + this.avatar;
+  //         console.log('a.filename is ', a.filename);
+  //         this.avatarUrl = a.filename.split(".")[0] + '-tn160.' +'png';
+  //       }
+  //       else {
+  //         this.avatar = '62b4a67c2d87d891a6eae477866320d6.png';
+  //       }
+  //     })
+  //   }, error => console.log(error))
+  // }
   //
   onLogout(){
     console.log('onLogout()');
@@ -131,7 +132,7 @@ export class ProfilePage {
               this.mediaProvider.addTag('profile',response.file_id).subscribe(ans => {
                 console.log(ans);
                 setTimeout(() => {
-                  this.getProfilePic();
+                  // this.getProfilePic();
                   uploadSpinner.dismiss().catch(error => console.log(error));
                   console.log('timeout');
                 }, 500)
@@ -165,7 +166,7 @@ export class ProfilePage {
                 this.mediaProvider.addTag('profile',response.file_id).subscribe(ans => {
                   console.log(ans);
                   setTimeout(() => {
-                    this.getProfilePic();
+                    // this.getProfilePic();
                     uploadSpinner.dismiss().catch(error => console.log(error));
                     console.log('timeout');
                   }, 500)

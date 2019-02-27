@@ -65,7 +65,9 @@ export class MediaProvider {
   // get user data
   getUserData(id: number): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(this.baseUrl + 'users/' + id, {
+    console.log('link to server');
+    let link = this.baseUrl + 'users/' + id;
+    return this.http.get(link, {
       headers: { 'x-access-token': token }
     });
   }
@@ -73,6 +75,7 @@ export class MediaProvider {
   getUserDetail(id: number, type?: string) {
     return new Promise(resolve => {
       this.getUserData(id).subscribe(res => {
+        console.log('detail: '+ type + ' of id: ' +id);
         console.log(res);
         switch (type) {
           case 'name':
@@ -92,7 +95,7 @@ export class MediaProvider {
     });
   }
   // get profile pic id
-  getProfilePicName(id: number) {
+  getProfilePicName(id: number, size: string) {
     console.log('userid: ' + id);
     return new Promise(resolve => {
       this.http.get<Pic[]>(this.baseUrl + 'tags/profile').subscribe(res => {
@@ -101,13 +104,14 @@ export class MediaProvider {
         let found = false;
         res.forEach(pic => {
           if (pic.user_id === id) {
-            console.log(pic.user_id);
-            resolve(pic.filename);
+            console.log('found:' + pic.user_id);
+            resolve('https://media.mw.metropolia.fi/wbma/uploads/' + this.getFileThumbnail(pic.filename, size));
             found = true;
           }
         });
         if(!found) {
-          resolve('62b4a67c2d87d891a6eae477866320d6.png');
+          console.log('not found');
+          resolve('https://media.mw.metropolia.fi/wbma/uploads/'+ '62b4a67c2d87d891a6eae477866320d6-tn320.png');
         }
       });
     });
@@ -126,4 +130,28 @@ export class MediaProvider {
       headers: { 'x-access-token': token }
     })
   }
+  // manipulate file size
+  getFileThumbnail(value: string, size?: string) {
+    let thumbnail = '';
+    const fileName = value.split(".")[0];
+    switch (size) {
+      case 'small':
+        thumbnail = fileName + '-tn160.' +'png';
+        break;
+      case 'medium':
+        thumbnail = fileName + '-tn320.' +'png';
+        break;
+      case 'large':
+        thumbnail = fileName + '-tn640.' +'png';
+        break;
+      case 'screenshot':
+        thumbnail = value;
+        break;
+      default:
+        thumbnail = fileName + '-tn160.' +'png';
+        break;
+    }
+    return thumbnail;
+  }
 }
+

@@ -12,10 +12,12 @@ import { MediaProvider } from '../../providers/media/media';
 export class UserPipe implements PipeTransform {
   constructor(private mediaProvider: MediaProvider) {  }
 
-  transform(id: number, type: string) {
+  transform(id: number, type: string, size?: string) {
+    console.log('avatar of user: ' + id);
     if(type === 'avatar'){
-      return this.mediaProvider.getProfilePicName(id);
+      return this.mediaProvider.getProfilePicName(id, size);
     } else {
+      console.log('trying to get user detail:' + type + ' of user id: ' + id);
       return this.mediaProvider.getUserDetail(id, type);
     }
 
