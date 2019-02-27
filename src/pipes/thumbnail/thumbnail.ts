@@ -13,8 +13,8 @@ export class ThumbnailPipe implements PipeTransform {
   transform(value: string, sizeOption) {
   // value is the initial filename. We split it and change the file extension to select which one we want.
     let thumbnail;
-    const fileName= value.split(".")[0];
-
+    const fileName = value.split(".")[0];
+    console.log(fileName);
     switch (sizeOption) {
       case 'small':
         thumbnail = fileName + '-tn160.' +'png';

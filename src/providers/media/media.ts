@@ -112,9 +112,17 @@ export class MediaProvider {
       });
     });
   }
+  // modify user data
   modifyUserData(sentData: any) {
     let token = localStorage.getItem('token');
     return this.http.put(this.baseUrl + 'users',sentData, {
+      headers: { 'x-access-token': token }
+    })
+  }
+  // delete media
+  deleteMedia(id: number) {
+    let token = localStorage.getItem('token');
+    return this.http.delete(this.baseUrl + 'media/' + id,{
       headers: { 'x-access-token': token }
     })
   }

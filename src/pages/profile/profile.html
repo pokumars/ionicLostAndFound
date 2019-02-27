@@ -15,8 +15,10 @@
     <ion-avatar >
       <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
       <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
-      <img [src]="baseUrl +( avatar | thumbnail: 'medium')">
+      <img [src]="baseUrl + avatar" (click)="chooseNewProfile()">
+      <!--<img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + (user_id | userInfo: 'avatar' | async | thumbnail: 'medium')" (click)="chooseNewProfile()">-->
     </ion-avatar>
+      <p>{{avatar}}</p>
       <p>{{ userId | userInfo: 'name' | async }}</p>
       <p>{{ userMail }}</p>
 </ion-content>

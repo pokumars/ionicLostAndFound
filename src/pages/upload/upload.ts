@@ -76,15 +76,13 @@ export class UploadPage {
     }
     this.formData.append('title', this.title);
     this.formData.append('description', this.description);
-    console.log(this.formData.get('file'));
-    console.log(this.formData.get('title'));
-    console.log(this.formData.get('description'));
     // -------------------get token and send file to server
     let token = localStorage.getItem('token');
     console.log(token);
+    // send avatar
     this.mediaProvider.sendMedia(this.formData, token).subscribe(res => {
       console.log(res.file_id);
-      // set tag to picture here
+      // set 'profile' tag to avatar here
       this.mediaProvider.addTag(this.choice,res.file_id).subscribe(ans => {
         console.log(ans);
           setTimeout(() => {
