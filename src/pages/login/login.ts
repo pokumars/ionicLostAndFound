@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { LoginResponse } from '../../interfaces/loginResponse'
 //import { HomePage } from '../home/home';
 import { TabspagePage } from '../tabspage/tabspage';
+import { Tabs2Page } from '../tabs2/tabs2';
 
 
 @Component({
@@ -35,7 +36,12 @@ export class LoginPage {
       localStorage.setItem('email', response.user.email);
       localStorage.setItem('password', form.value.password);
       localStorage.setItem('user_id', response.user.user_id.toString());
-      this.navCtrl.setRoot(TabspagePage).catch(err => console.log(err));
+
+      //if we use this then we can delete tabspage as well home
+      this.navCtrl.setRoot(Tabs2Page).catch(err => console.log(err));
+
+
+
     },error => console.log('yeeeee man this be da error', error));
   }
 

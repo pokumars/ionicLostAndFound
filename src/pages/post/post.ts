@@ -25,6 +25,7 @@ export class PostPage {
   }
 
   ionViewDidLoad() {
+    // the specific post is passed to this so it gets its details
     this.post = this.navParams.get('post');
     console.log(this.post);
     console.log('ionViewDidLoad PostPage');

@@ -10,7 +10,7 @@ import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 
-import { TabspagePage } from '../pages/tabspage/tabspage';
+import { TabspagePage } from '../pages/tabspage/tabspage';// this gotta go
 import { LoginPage } from '../pages/login/login';
 import { SignUpPage } from '../pages/signup/signup';
 import { LandingPage } from '../pages/landing/landing';
@@ -18,23 +18,29 @@ import { AuthProvider } from '../providers/auth/auth';
 import { MediaProvider } from '../providers/media/media';
 import { UploadPage } from '../pages/upload/upload';
 import { PostPage } from '../pages/post/post';
-// pipe
+
 import { PipesModule } from '../pipes/pipes.module';
-import { UserPipe } from '../pipes/user/user-info';
-import { ThumbnailPipe } from '../pipes/thumbnail/thumbnail';
 import {ProfileEditPage} from "../pages/profile-edit/profile-edit";
+import { LostPage } from '../pages/lost/lost';
+import { FoundPage } from '../pages/found/found';
+import { Tabs2Page } from '../pages/tabs2/tabs2';
+import { ProfilePage } from '../pages/profile/profile';
 
 
 @NgModule({
   declarations: [
     MyApp,
     TabspagePage,
+    Tabs2Page,
     LoginPage,
     SignUpPage,
     LandingPage,
     UploadPage,
     PostPage,
-    ProfileEditPage
+    ProfileEditPage,
+    LostPage,
+    FoundPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -45,13 +51,17 @@ import {ProfileEditPage} from "../pages/profile-edit/profile-edit";
   bootstrap: [IonicApp],
   entryComponents: [
     TabspagePage,
+    Tabs2Page,
     MyApp,
     LoginPage,
     SignUpPage,
     LandingPage,
     UploadPage,
     PostPage,
-    ProfileEditPage
+    ProfileEditPage,
+    LostPage,
+    FoundPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
