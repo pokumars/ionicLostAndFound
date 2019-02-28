@@ -10,7 +10,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
     <ion-avatar >
       <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
@@ -18,7 +17,7 @@
       <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
       <img [src]="(userId | userInfo: 'avatar': 'medium' | async)" (click)="chooseNewProfile()">
     </ion-avatar>
-      <p>{{avatar}}</p>
+      <p>{{ avatar }}  </p>
       <p>{{ username }}</p>
       <p>{{ userMail }}</p>
 </ion-content>

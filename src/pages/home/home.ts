@@ -48,4 +48,11 @@ export class HomePage {
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
+  // refresh page
+  doRefresh(event) {
+    console.log('something happened');
+    console.log(event);
+    this.getAllFile();
+    event.complete();
+  }
 }
