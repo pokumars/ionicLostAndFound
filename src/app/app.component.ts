@@ -4,11 +4,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LandingPage } from '../pages/landing/landing';
+import { TabspagePage } from '../pages/tabspage/tabspage';
+import { Tabs2Page } from '../pages/tabs2/tabs2';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  // rootPage:any = Tabs2Page; //for testing purposes
   rootPage:any = LandingPage; // is the page user gonna see first, to display logo
   // rootPage:any = LoginPage; // loginPage should be the root page until user is logged in
 
