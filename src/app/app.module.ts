@@ -4,10 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-import { HttpClientModule } from '@angular/common/http';
-import { Chooser } from '@ionic-native/chooser';
-import { Camera } from '@ionic-native/camera';
-
 import { MyApp } from './app.component';
 
 import { TabspagePage } from '../pages/tabspage/tabspage';// this gotta go
@@ -18,13 +14,19 @@ import { AuthProvider } from '../providers/auth/auth';
 import { MediaProvider } from '../providers/media/media';
 import { UploadPage } from '../pages/upload/upload';
 import { PostPage } from '../pages/post/post';
-
-import { PipesModule } from '../pipes/pipes.module';
-import {ProfileEditPage} from "../pages/profile-edit/profile-edit";
+import { ProfileEditPage } from '../pages/profile-edit/profile-edit';
 import { LostPage } from '../pages/lost/lost';
 import { FoundPage } from '../pages/found/found';
 import { Tabs2Page } from '../pages/tabs2/tabs2';
 import { ProfilePage } from '../pages/profile/profile';
+
+import { PipesModule } from '../pipes/pipes.module';
+import { LongPressModule } from "ionic-long-press";
+import { HttpClientModule } from '@angular/common/http';
+import { Chooser } from '@ionic-native/chooser';
+import { Camera } from '@ionic-native/camera';
+import { ComponentsModule } from '../components/components.module';
+import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
 
 
 @NgModule({
@@ -40,13 +42,16 @@ import { ProfilePage } from '../pages/profile/profile';
     ProfileEditPage,
     LostPage,
     FoundPage,
-    ProfilePage
+    ProfilePage,
+    DropdownpagePage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     PipesModule,
+    LongPressModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,7 +66,8 @@ import { ProfilePage } from '../pages/profile/profile';
     ProfileEditPage,
     LostPage,
     FoundPage,
-    ProfilePage
+    ProfilePage,
+    DropdownpagePage
   ],
   providers: [
     StatusBar,

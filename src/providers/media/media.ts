@@ -61,6 +61,13 @@ export class MediaProvider {
   getComment(file_id: number): Observable<any> {
     return this.http.get(this.baseUrl + 'comments/file/' + file_id);
   }
+  // delete comments
+  deleteComment(comment_id: number): Observable<any> {
+    let token = localStorage.getItem('token');
+    return this.http.delete(this.baseUrl + 'comments/' + comment_id, {
+      headers: { 'x-access-token': token }
+    });
+  }
   // -----------------------concerning user data-----------------------
   // get user data
   getUserData(id: number): Observable<any> {

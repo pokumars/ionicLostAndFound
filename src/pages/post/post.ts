@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController, Popover, AlertController} from 'ionic-angular';
 import { Pic } from '../../interfaces/Pic';
 import { MediaProvider } from '../../providers/media/media';
+import { Comm } from '../../interfaces/comment';
+import {PopoverComponent} from "../../components/popover/popover";
+import {DropdownpagePage} from "../dropdownpage/dropdownpage";
 
 /**
  * Generated class for the PostPage page.
@@ -18,10 +21,14 @@ import { MediaProvider } from '../../providers/media/media';
 export class PostPage {
   post: Pic;
   comment = '';
-  comments = [];
+  comments: Comm[];
+  userId: number;
+  userName = '';
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private mediaProvider: MediaProvider) {
+              private mediaProvider: MediaProvider,
+              private popoverController: PopoverController,
+              private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -30,6 +37,8 @@ export class PostPage {
     console.log(this.post);
     console.log('ionViewDidLoad PostPage');
     this.getComments();
+    this.userId = parseInt(localStorage.getItem('user_id'));
+    this.userName = localStorage.getItem('username');
   }
   ionViewWillEnter() {
     this.post = this.navParams.get('post');
@@ -52,4 +61,49 @@ export class PostPage {
       this.comments = ans;
     })
   }
+  // delete comment by own user
+  deleteComments(comment_id: number) {
+    console.log('trying to delete comments id: ' + comment_id);
+      this.mediaProvider.deleteComment(comment_id).subscribe(ans => {
+        console.log(ans);
+        this.getComments();
+      })
+  }
+  // refresh comments section
+  doRefresh(event) {
+    console.log('something happened');
+    console.log(event);
+    this.getComments();
+    event.complete();
+  }
+  // testing alert
+  // async alertDelete() {
+  //   console.log('alert');
+  //   const alert = await this.alertCtrl.create({
+  //     message: 'This is an alert message.',
+  //     buttons: ['OK']
+  //   });
+  //   await alert.present();
+  // }
+  // test long press
+  // longpress() {
+  //   console.log('testing long press');
+  // }
+  // pressed() {
+  //   console.log('pressed');
+  // }
+  // active() {
+  //   console.log('active');
+  // }
+  // released() {
+  //   console.log('released');
+  // }
+  // test pop over
+  // presentPopover(ev: any) {
+  //   const popover = this.popoverController.create(DropdownpagePage);
+  //   popover.present({
+  //     animate: true,
+  //
+  //   });
+  // }
 }

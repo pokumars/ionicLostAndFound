@@ -12,13 +12,13 @@
   <label>Comments</label>
   <ion-textarea [(ngModel)]="comment"></ion-textarea>
   <button ion-button *ngIf="comment!==''" (click)="sendComment()">send</button>
-
   <ion-list *ngIf="comments.length !== 0">
-    <ion-item *ngFor="let cm of comments">
+    <ion-item *ngFor="let cm of comments" style="position: relative;">
       <img [src]="(cm.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 20px;">
       <h4 style="color: lightpink">{{ cm.user_id | userInfo: 'name' | async }}</h4>
       <p>{{ cm.comment }}</p>
       <p style="font-size: 3px">{{cm.time_added}}</p>
+      <button style="position: absolute; right: 1px; top: 1px" *ngIf="userId===cm.user_id" (click)="deleteComments(cm.comment_id)">x</button>
     </ion-item>
   </ion-list>
 </ion-content>
