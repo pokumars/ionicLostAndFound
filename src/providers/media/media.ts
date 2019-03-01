@@ -137,6 +137,22 @@ export class MediaProvider {
       headers: { 'x-access-token': token }
     })
   }
+  // get user lost and found stat i.e how many items they have lost or found
+  getStat(type: string, userId: number){
+    let count = 0;
+    return new Promise(resolve => {
+      this.getAllMedia(type).subscribe(posts => {
+        for(let post of posts) {
+          if (post.user_id === userId) {
+            count++;
+          }
+        }
+        console.log('number of ' + type + ' is: ' + count);
+        resolve(count);
+      })
+    })
+  }
+  // ------------------ concerning file size thumbnail --------------------------
   // manipulate file size
   getFileThumbnail(value: string, size?: string) {
     let thumbnail = '';

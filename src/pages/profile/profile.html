@@ -11,13 +11,25 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-avatar >
-      <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
-      <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
-      <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
-      <img [src]="(userId | userInfo: 'avatar': 'medium' | async)" (click)="chooseNewProfile()">
-    </ion-avatar>
-      <p>{{ avatar }}  </p>
-      <p>{{ username }}</p>
-      <p>{{ userMail }}</p>
+  <ion-avatar >
+    <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
+    <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
+    <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
+    <img [src]="(userId | userInfo: 'avatar': 'medium' | async)" (click)="chooseNewProfile()">
+  </ion-avatar>
+    <p>{{ avatar }}  </p>
+    <p>{{ username }}</p>
+    <p>{{ userMail }}</p>
+  <ion-item>
+    <ion-label>LOST</ion-label>
+  </ion-item>
+  <ion-item>
+    <p>{{ userId | userInfo: 'lost-stat' | async }}</p>
+  </ion-item>
+  <ion-item>
+    <ion-label>FOUND</ion-label>
+  </ion-item>
+  <ion-item>
+    <p>{{ userId | userInfo: 'found-stat' | async }}</p>
+  </ion-item>
 </ion-content>
