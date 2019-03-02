@@ -24,7 +24,7 @@ export class FoundPage {
   uploadPage = UploadPage;
   homePage = HomePage;
   lost = false;
-  picArray: Observable<Pic[]>;
+  picArray: {};
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -45,12 +45,17 @@ export class FoundPage {
     if(!this.lost){
       this.picArray = this.mediaProvider.getAllMedia('found');
     }
-    this.picArray.subscribe(res => console.log(res));
   }
 
   // go to detailed post
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
-
+  // refresh page
+  doRefresh(event) {
+    console.log('something happened');
+    console.log(event);
+    this.getAllFile();
+    event.complete();
+  }
 }

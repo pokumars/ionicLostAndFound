@@ -1,9 +1,11 @@
 <ion-header>
   <ion-navbar>
+    <h2 *ngIf="post">{{ post.title }}</h2>
   </ion-navbar>
 </ion-header>
-<ion-content padding *ngIf="post">
-  <h2>{{ post.title }}</h2>
+<ion-content padding *ngIf="post" style="position: relative;">
+  <button *ngIf="post.user_id === userId" (click)="removePost()">Remove</button>
+  <button *ngIf="post.user_id === userId" (click)="resolvePost()">Resolve</button>
   <h5>{{ post.user_id | userInfo: 'name' | async }}</h5>
   <img [src]="(post.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 40px;">
   <p style="font-size: smaller">{{ post.time_added | date}}</p>

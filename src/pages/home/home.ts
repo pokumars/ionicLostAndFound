@@ -13,7 +13,7 @@ import { PostPage } from "../post/post";
 })
 export class HomePage {
   lost = true;
-  picArray: Observable<Pic[]>;
+  picArray: {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private mediaProvider: MediaProvider) {
@@ -42,7 +42,6 @@ export class HomePage {
     } else {
       this.picArray = this.mediaProvider.getAllMedia('found');
     }
-    this.picArray.subscribe(res => console.log(res));
   }
   // go to detailed post
   goToDetailed(post: Pic) {

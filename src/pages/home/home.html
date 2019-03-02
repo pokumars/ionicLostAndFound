@@ -5,13 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <button ion-button solid  *ngIf="lost" (click)="goToOtherPage()">Go To Found Page</button>
     <button ion-button solid  *ngIf="!lost" (click)="goToOtherPage()">Go To Lost Page</button>
     <button (click)="goToUpload()">Go To Upload Page</button>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -19,7 +17,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
+  <ion-list *ngIf="picArray!== {}">
     <ion-item *ngFor="let image of picArray | async">
       <ion-thumbnail item-start>
         <img [src]="(image.filename| thumbnail: 'small')" [alt]="image.description" (click)="goToDetailed(image)">

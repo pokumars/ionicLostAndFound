@@ -3,8 +3,8 @@ import {IonicPage, NavController, NavParams, PopoverController, Popover, AlertCo
 import { Pic } from '../../interfaces/Pic';
 import { MediaProvider } from '../../providers/media/media';
 import { Comm } from '../../interfaces/comment';
-import {PopoverComponent} from "../../components/popover/popover";
-import {DropdownpagePage} from "../dropdownpage/dropdownpage";
+import { PopoverComponent } from "../../components/popover/popover";
+import { DropdownpagePage } from "../dropdownpage/dropdownpage";
 
 /**
  * Generated class for the PostPage page.
@@ -68,6 +68,17 @@ export class PostPage {
         console.log(ans);
         this.getComments();
       })
+  }
+  // resolve a post
+  resolvePost() {
+    this.mediaProvider.addTag('resolved',this.post.file_id)
+  }
+  // remove a post
+  removePost() {
+    this.mediaProvider.deleteMedia(this.post.file_id).subscribe(res => {
+      console.log(res);
+      this.navCtrl.pop().catch(err => console.log(err));
+    })
   }
   // refresh comments section
   doRefresh(event) {

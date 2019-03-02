@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { Pic } from "../../interfaces/Pic";
-
 /*
   Generated class for the MediaProvider provider.
 
@@ -39,8 +38,24 @@ export class MediaProvider {
     });
   }
   // get all the media
-  getAllMedia(type: string): Observable<Pic[]> {
-    return this.http.get<Pic[]>(this.baseUrl + 'tags/' + type);
+  getAllMedia(type: string) {
+    return new Promise(resolve => {
+      this.http.get<Pic[]>(this.baseUrl + 'tags/' + type).subscribe(ans => {
+        let res = ans.sort((a, b) => {
+          let date_a = new Date(a.time_added);
+          let date_b = new Date(b.time_added);
+          if(date_a < date_b) {
+            return 1;
+          } else if (date_a > date_b) {
+            return -1;
+          }
+          else {
+            return 0
+          }
+        });
+        resolve(res)
+      });
+    })
   }
   // get a single file's detail with all the thumbnails info available
   getSingleMedia(id: number): Observable<Pic> {
@@ -141,18 +156,18 @@ export class MediaProvider {
   getStat(type: string, userId: number){
     let count = 0;
     return new Promise(resolve => {
-      this.getAllMedia(type).subscribe(posts => {
-        for(let post of posts) {
+      this.getAllMedia(type).then((posts: Pic[]) => {
+        posts.forEach(post => {
           if (post.user_id === userId) {
             count++;
           }
-        }
+        });
         console.log('number of ' + type + ' is: ' + count);
         resolve(count);
       })
     })
   }
-  // ------------------ concerning file size thumbnail --------------------------
+  // ------------------ concerning other stuffs --------------------------
   // manipulate file size
   getFileThumbnail(value: string, size?: string) {
     let thumbnail = '';
@@ -175,6 +190,12 @@ export class MediaProvider {
         break;
     }
     return thumbnail;
+  }
+  // sorting media array
+  sortMedia(type: string, media: Pic[]) {
+    if(type === 'ascend') {
+
+    }
   }
 }
 
