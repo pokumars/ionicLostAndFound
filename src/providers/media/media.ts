@@ -16,10 +16,12 @@ export class MediaProvider {
   constructor(public http: HttpClient) {
     console.log('Hello MediaProvider Provider');
   }
+
   // ---------------- get user avatar -------------------------
   getAvatar(tag: string) {
     return this.http.get(this.baseUrl + 'tags/' +tag);
   }
+
   // ----------------concerning media data--------------------------------
   // upload file to server
   // send media to server
@@ -28,6 +30,7 @@ export class MediaProvider {
       headers: { 'x-access-token': token }
     });
   }
+
   // add tag to media
   addTag(tag: string, file_id: number): Observable<any> {
     let token = localStorage.getItem('token');
@@ -38,14 +41,26 @@ export class MediaProvider {
       headers: { 'x-access-token': token }
     });
   }
+
   // get all the media
   getAllMedia(type: string): Observable<Pic[]> {
     return this.http.get<Pic[]>(this.baseUrl + 'tags/' + type);
   }
+
+  // get all media of a user
+  getUsersMedia(user_id: string) {
+    let link =this.baseUrl +`media/user/${user_id}`;
+    let token = localStorage.getItem('token');
+    return this.http.get<Pic[]>(link, {
+      headers: { 'x-access-token': token}
+    });
+  }
+
   // get a single file's detail with all the thumbnails info available
   getSingleMedia(id: number): Observable<Pic> {
     return this.http.get<Pic>(this.baseUrl + 'media/' + id);
   }
+
   // -----------------------concerning comments-----------------------
   // send comment
   sendComment(comment: string, file_id: number): Observable<any> {

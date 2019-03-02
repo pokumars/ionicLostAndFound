@@ -7,6 +7,7 @@ import { unescape } from "querystring";
 import { ProfileEditPage } from "../profile-edit/profile-edit";
 import { Chooser } from '@ionic-native/chooser';
 import { LoadingController } from 'ionic-angular';
+import { MyPostsPage } from '../my-posts/my-posts';
 
 /**
  * Generated class for the ProfilePage page.
@@ -23,16 +24,14 @@ import { LoadingController } from 'ionic-angular';
 export class ProfilePage {
   baseUrl = 'https://media.mw.metropolia.fi/wbma/uploads/';
   userId: number;
-  username = '';
-  userMail = '';
-  avatar = '';
-  avatarId: number;
-  avatarUrl: string;
-  chosenFile: Blob;
+  username = '';  userMail = '';  avatar = '';
+  avatarId: number;  avatarUrl: string;
+  chosenFile: Blob; formData: FormData;
   file: File;
-  isAndroid = false; isWindows = false;
-  formData: FormData;
-  isImage = false;
+  isAndroid = false; isWindows = false; isImage = false;
+  myPosts = MyPostsPage;
+
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private app: App,

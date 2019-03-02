@@ -25,6 +25,8 @@ import { LostPage } from '../pages/lost/lost';
 import { FoundPage } from '../pages/found/found';
 import { Tabs2Page } from '../pages/tabs2/tabs2';
 import { ProfilePage } from '../pages/profile/profile';
+import { MyPostsPage } from '../pages/my-posts/my-posts';
+import { SharedMethodsProvider } from '../providers/shared-methods/shared-methods';
 
 
 @NgModule({
@@ -40,12 +42,16 @@ import { ProfilePage } from '../pages/profile/profile';
     ProfileEditPage,
     LostPage,
     FoundPage,
-    ProfilePage
+    ProfilePage,
+    MyPostsPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      // this makes the tabs disappear on sub pages
+      tabsHideOnSubPages: true
+    }),
     PipesModule,
   ],
   bootstrap: [IonicApp],
@@ -61,7 +67,8 @@ import { ProfilePage } from '../pages/profile/profile';
     ProfileEditPage,
     LostPage,
     FoundPage,
-    ProfilePage
+    ProfilePage,
+    MyPostsPage
   ],
   providers: [
     StatusBar,
@@ -71,6 +78,7 @@ import { ProfilePage } from '../pages/profile/profile';
     Chooser,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SharedMethodsProvider,
   ]
 })
 export class AppModule {}

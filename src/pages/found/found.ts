@@ -52,5 +52,8 @@ export class FoundPage {
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
+  toProfilePage(){
+     // this.navCtrl.setRoot(ProfilePage);
+  }
 
 }
