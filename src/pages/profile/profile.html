@@ -16,12 +16,12 @@
     <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
     <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
     <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
-    <img [src]="(userId | userInfo: 'avatar': 'medium' | async)" (click)="chooseNewProfile()">
+    <img [src]="(userId | userInfo: 'avatar': 'small' | async)" (click)="chooseNewProfile()">
   </ion-avatar>
     <p>{{ avatar }}  </p>
     <p>{{ username }}</p>
     <p>{{ userMail }}</p>
-    <button ion-button block [navPush]="myPosts">My previous posts</button>
+    <button ion-button block [navPush]="myPosts">View my previous posts</button>
   <ion-item>
     <ion-label>LOST</ion-label>
   </ion-item>
