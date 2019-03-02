@@ -44,8 +44,8 @@ export class MyPostsPage {
 
   //get all lost posts of a user
   getAllMyLost() {
-    this.mediaProvider.getAllMedia('lost').subscribe(
-      (results) => {// gives all posts with lost tag
+    this.mediaProvider.getAllMedia('lost').then(
+      (results: Pic[]) => {// gives all posts with lost tag
         console.log('lost posts >>>>>>',results);
 
         //filter that for ones that were made by this user
@@ -58,9 +58,10 @@ export class MyPostsPage {
       }
     )
   }
+
   getAllMyFound() {
 
-    this.mediaProvider.getAllMedia('found').subscribe(
+    this.mediaProvider.getAllMedia('found').then(
       (results: Pic[]) => {// gives all posts with found tag
         console.log('found posts >>>>>>',results);
 
