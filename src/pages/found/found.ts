@@ -58,4 +58,8 @@ export class FoundPage {
     this.getAllFile();
     event.complete();
   }
+  toProfilePage(){
+     // this.navCtrl.setRoot(ProfilePage);
+  }
+
 }

@@ -11,6 +11,7 @@
 </ion-header>
 
 <ion-content padding>
+
   <ion-avatar >
     <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
     <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
@@ -20,6 +21,7 @@
     <p>{{ avatar }}  </p>
     <p>{{ username }}</p>
     <p>{{ userMail }}</p>
+    <button ion-button block [navPush]="myPosts">My previous posts</button>
   <ion-item>
     <ion-label>LOST</ion-label>
   </ion-item>
@@ -32,4 +34,7 @@
   <ion-item>
     <p>{{ userId | userInfo: 'found-stat' | async }}</p>
   </ion-item>
+
 </ion-content>
+
+

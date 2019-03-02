@@ -19,6 +19,8 @@ import { LostPage } from '../pages/lost/lost';
 import { FoundPage } from '../pages/found/found';
 import { Tabs2Page } from '../pages/tabs2/tabs2';
 import { ProfilePage } from '../pages/profile/profile';
+import { MyPostsPage } from '../pages/my-posts/my-posts';
+import { SharedMethodsProvider } from '../providers/shared-methods/shared-methods';
 
 import { PipesModule } from '../pipes/pipes.module';
 import { LongPressModule } from "ionic-long-press";
@@ -43,12 +45,16 @@ import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
     LostPage,
     FoundPage,
     ProfilePage,
-    DropdownpagePage
+    DropdownpagePage,
+    MyPostsPage,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      // this makes the tabs disappear on sub pages
+      tabsHideOnSubPages: true
+    }),
     PipesModule,
     LongPressModule,
     ComponentsModule
@@ -67,7 +73,8 @@ import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
     LostPage,
     FoundPage,
     ProfilePage,
-    DropdownpagePage
+    DropdownpagePage,
+    MyPostsPage,
   ],
   providers: [
     StatusBar,
@@ -77,6 +84,7 @@ import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
     Chooser,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SharedMethodsProvider,
   ]
 })
 export class AppModule {}
