@@ -1,3 +1,5 @@
+import {Tag} from "./tag";
+
 export interface Pic {
   file_id: number;
   filename: string;
@@ -14,9 +16,14 @@ export interface Pic {
     w320: string;
     w640: string;
   }
+  tags?: Tag[];
+  resolvedStatus?: boolean;
+  backgroundColor?: string;
+  color?: string;
 }
 
 export interface TagsResponse{
+  tag_id: number;
   file_id: number;
   tag: string;
   filename: string;

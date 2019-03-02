@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { Pic } from "../../interfaces/Pic";
+import {Pic, TagsResponse} from "../../interfaces/Pic";
+import {Tag} from "../../interfaces/tag";
 /*
   Generated class for the MediaProvider provider.
 
@@ -41,25 +42,90 @@ export class MediaProvider {
   getAllMedia(type: string) {
     return new Promise(resolve => {
       this.http.get<Pic[]>(this.baseUrl + 'tags/' + type).subscribe(ans => {
-        let res = ans.sort((a, b) => {
-          let date_a = new Date(a.time_added);
-          let date_b = new Date(b.time_added);
-          if(date_a < date_b) {
-            return 1;
-          } else if (date_a > date_b) {
-            return -1;
-          }
-          else {
-            return 0
-          }
+        this.retrieveTags(ans).then((answer:Pic[]) => {
+          console.log('list of files post tags:...................................');
+          console.log(answer);
+          let final = this.sortMedia(answer);
+          this.addResolved(final).then(res => {
+            resolve(res);
+          })
         });
-        resolve(res)
-      });
+      })
     })
   }
   // get a single file's detail with all the thumbnails info available
   getSingleMedia(id: number): Observable<Pic> {
     return this.http.get<Pic>(this.baseUrl + 'media/' + id);
+  }
+  // check resolved status
+  checkResolved(post_id: number) {
+    return new Promise(resolve => {
+      this.http.get(this.baseUrl + 'tags/file/' + post_id).subscribe((tags:Tag[]) => {
+        console.log(tags);
+        for(let tag of tags){
+          if(tag.tag === 'resolved'){
+            resolve(true);
+          }
+        }
+        resolve(false);
+      })
+    });
+  }
+  // add resolved status to file
+  addResolved(mediaArray: Pic[]) {
+    return new Promise(resolve => {
+      let resolved: Pic[] = [];
+      let unresolved: Pic[] = [];
+      this.http.get(this.baseUrl + 'tags/resolved').subscribe((ans:TagsResponse[]) => {
+        for(let pic of mediaArray) {
+          let found = false;
+          for(let an of ans) {
+            if(pic.file_id === an.file_id) {
+              found = true;
+            }
+          }
+          if(found) {
+            pic.resolvedStatus = true;
+            pic.backgroundColor = 'black';
+            pic.color = 'white';
+            resolved.push(pic);
+          } else {
+            pic.resolvedStatus = false;
+            pic.backgroundColor = 'white';
+            pic.color = 'black';
+            unresolved.push(pic);
+          }
+        }
+        resolve(unresolved.concat(resolved));
+      })
+    })
+  }
+  // retrieve tags to media from server
+  retrieveTags(files: Pic[]) {
+    return new Promise(resolve => {
+      files.forEach(file => {
+        this.http.get(this.baseUrl + 'tags/file/' + file.file_id).subscribe((ans: Tag[]) => {
+          console.log(ans);
+          file.tags = ans;
+        })
+      });
+      resolve(files);
+    })
+  }
+  // sort media array
+  sortMedia(mediaArray: Pic[]) {
+    return mediaArray.sort((a, b) => {
+      let date_a = new Date(a.time_added);
+      let date_b = new Date(b.time_added);
+      if(date_a < date_b) {
+        return 1;
+      } else if (date_a > date_b) {
+        return -1;
+      }
+      else {
+        return 0
+      }
+    });
   }
   // -----------------------concerning comments-----------------------
   // send comment
@@ -190,12 +256,6 @@ export class MediaProvider {
         break;
     }
     return thumbnail;
-  }
-  // sorting media array
-  sortMedia(type: string, media: Pic[]) {
-    if(type === 'ascend') {
-
-    }
   }
 }
 

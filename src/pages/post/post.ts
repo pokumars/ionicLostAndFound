@@ -71,7 +71,7 @@ export class PostPage {
   }
   // resolve a post
   resolvePost() {
-    this.mediaProvider.addTag('resolved',this.post.file_id)
+    this.mediaProvider.addTag('resolved',this.post.file_id).subscribe(ans => console.log(ans));
   }
   // remove a post
   removePost() {
