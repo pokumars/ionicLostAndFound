@@ -39,13 +39,6 @@ export class MyPostsPage {
     this.getAllMyLost();
   }
 
- /*  getAllMyPosts() {
-    // console.log('my userId >>>>>', this.userId)
-    this.allPicArray = this.mediaProvider.getUsersMedia(this.userId);
-    this.allPicArray.subscribe(res => console.log('11111111',res));
-    // console.log('array==>>>', this.allPicArray)
-  }
- */
   //get all lost posts of a user
   getAllMyLost() {
     this.mediaProvider.getAllMedia('lost').then(
@@ -105,15 +98,6 @@ export class MyPostsPage {
       this.solvedPostArray = this.mediaProvider.sortMedia(this.solvedPostArray);
       console.log('A test filter for the tag', this.solvedPostArray);
     },1500)
-
-
-    /* this.solvedPostArray = this.allPostArray.filter((img: Pic) => {
-      console.log('img.tags ',img.tags);
-      console.log('resolved should be the tag');
-      console.log('We have come this far', img);
-
-       return img.tags.filter( item => item.tag ==='resolved');
-    });*/
   }
 
 }
