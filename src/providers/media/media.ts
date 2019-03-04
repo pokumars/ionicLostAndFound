@@ -57,7 +57,6 @@ export class MediaProvider {
       })
     })
   }
-
   // get all media of a user
   getUsersMedia(user_id: string) {
     let link =this.baseUrl +`media/user/${user_id}`;
@@ -66,10 +65,27 @@ export class MediaProvider {
       headers: { 'x-access-token': token}
     });
   }
-
   // get a single file's detail with all the thumbnails info available
-  getSingleMedia(id: number): Observable<Pic> {
-    return this.http.get<Pic>(this.baseUrl + 'media/' + id);
+  getSingleMedia(id: number){
+    return new Promise(resolve => {
+      this.http.get<Pic>(this.baseUrl + 'media/' + id).subscribe(pic => {
+        this.checkResolved(pic.file_id).then((res: boolean) => {
+          if(res) {
+            pic.resolvedStatus = true;
+            pic.backgroundColor = 'black';
+            pic.color = 'white';
+          } else {
+            pic.resolvedStatus = false;
+            pic.backgroundColor = 'white';
+            pic.color = 'black';
+          }
+          this.getAllTags(pic.file_id).subscribe((ans: Tag[]) => {
+            pic.tags = ans;
+            resolve(pic);
+          });
+        })
+      });
+    })
   }
   // check resolved status
   checkResolved(post_id: number) {
@@ -126,6 +142,10 @@ export class MediaProvider {
       resolve(files);
     })
   }
+  // get all tags of one file
+  getAllTags(id: number) {
+    return this.http.get(this.baseUrl + 'tags/file/' + id);
+  }
   // sort media array
   sortMedia(mediaArray: Pic[]) {
     return mediaArray.sort((a, b) => {
@@ -141,7 +161,13 @@ export class MediaProvider {
       }
     });
   }
-
+  // modifying media data
+  editMedia(id: number, sentData: any) {
+    let token = localStorage.getItem('token');
+    return this.http.put(this.baseUrl + 'media/' + id, sentData, {
+      headers: { 'x-access-token': token }
+    })
+  }
   // -----------------------concerning comments-----------------------
   // send comment
   sendComment(comment: string, file_id: number): Observable<any> {
@@ -222,7 +248,7 @@ export class MediaProvider {
   // modify user data
   modifyUserData(sentData: any) {
     let token = localStorage.getItem('token');
-    return this.http.put(this.baseUrl + 'users',sentData, {
+    return this.http.put(this.baseUrl + 'users', sentData, {
       headers: { 'x-access-token': token }
     })
   }

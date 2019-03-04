@@ -29,6 +29,7 @@ import { Chooser } from '@ionic-native/chooser';
 import { Camera } from '@ionic-native/camera';
 import { ComponentsModule } from '../components/components.module';
 import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
+import {EditPostPage} from "../pages/edit-post/edit-post";
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
     ProfilePage,
     DropdownpagePage,
     MyPostsPage,
+    EditPostPage
   ],
   imports: [
     BrowserModule,
@@ -75,6 +77,7 @@ import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
     ProfilePage,
     DropdownpagePage,
     MyPostsPage,
+    EditPostPage
   ],
   providers: [
     StatusBar,

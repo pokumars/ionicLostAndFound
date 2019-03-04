@@ -22,10 +22,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item *ngFor="let image of picArray | async" [ngStyle]="{'background-color': image.backgroundColor, 'color': image.color}">
+    <ion-item *ngFor="let image of picArray | async" [ngStyle]="{'background-color': image.backgroundColor, 'color': image.color}" (click)="goToDetailed(image)">
       <ion-thumbnail item-start>
         <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-             [alt]="image.description" (click)="goToDetailed(image)">
+             [alt]="image.description">
       </ion-thumbnail>
       <h1>{{ image.title }}</h1>
       <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>

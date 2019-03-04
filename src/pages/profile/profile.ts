@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {App, IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { MediaProvider } from '../../providers/media/media';
-import { TagsResponse } from '../../interfaces/Pic';
+import {Pic, TagsResponse} from '../../interfaces/Pic';
 import { unescape } from "querystring";
 import { ProfileEditPage } from "../profile-edit/profile-edit";
 import { Chooser } from '@ionic-native/chooser';
@@ -123,7 +123,7 @@ export class ProfilePage {
           this.mediaProvider.sendMedia(this.formData, token).subscribe(response => {
             console.log(response);
             this.avatarId = response.file_id;
-            this.mediaProvider.getSingleMedia(this.avatarId).subscribe(answer => {
+            this.mediaProvider.getSingleMedia(this.avatarId).then((answer: Pic) => {
               console.log('this is the answer: ');
               console.log(answer);
               this.avatar = answer.filename;
@@ -157,7 +157,7 @@ export class ProfilePage {
             this.mediaProvider.sendMedia(this.formData, token).subscribe(response => {
               console.log(response);
               this.avatarId = response.file_id;
-              this.mediaProvider.getSingleMedia(this.avatarId).subscribe(answer => {
+              this.mediaProvider.getSingleMedia(this.avatarId).then((answer: Pic) => {
                 console.log('this is the answer: ');
                 console.log(answer);
                 this.avatar = answer.filename;
