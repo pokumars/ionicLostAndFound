@@ -20,11 +20,12 @@ export class MyPostsPage {
   // allPicArray: Observable<Pic[]>;
   lostPicArray: Pic[];
   foundPicArray: Pic[];
+  allPostArray:  Pic[];
+  combineArrTemp: Pic[]= [];
+  solvedPostArray:  Pic[];
+
   pet: string = "puppies";
   userId = localStorage.getItem('user_id');
-  combineArrTemp: Pic[]= [];
-  allPostArray:  Pic[];
-  solvedPostArray:  Pic[];
 
 
   constructor(public navCtrl: NavController,
@@ -60,6 +61,10 @@ export class MyPostsPage {
           }
         });
         console.log('2combo after getAllMyLost >>>>>>>>>>>>>>>>', this.combineArrTemp);
+        // sort array by time
+        this.lostPicArray = this.mediaProvider.sortMedia(this.lostPicArray);
+
+        // setup the array containing all myposts. add lost and ound and sort by time
         this.createAllArr();
       }
     )
@@ -79,6 +84,11 @@ export class MyPostsPage {
             return img;
           }
         });
+
+        // sort array by time
+        this.foundPicArray = this.mediaProvider.sortMedia(this.foundPicArray);
+
+        // setup the array containing all myposts. add lost and ound and sort by time
         this.createAllArr();
         console.log('1 combo after getAllMyFound >>>>>>>>>>>>>>>>', this.combineArrTemp);
 
