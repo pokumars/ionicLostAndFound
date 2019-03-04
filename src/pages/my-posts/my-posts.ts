@@ -71,7 +71,6 @@ export class MyPostsPage {
   }
 
   getAllMyFound() {
-
     this.mediaProvider.getAllMedia('found').then(
       (results: Pic[]) => {// gives all posts with found tag
         console.log('found posts >>>>>>',results);
@@ -91,7 +90,6 @@ export class MyPostsPage {
         // setup the array containing all myposts. add lost and ound and sort by time
         this.createAllArr();
         console.log('1 combo after getAllMyFound >>>>>>>>>>>>>>>>', this.combineArrTemp);
-
       }
     );
   }
