@@ -16,7 +16,7 @@
       <ion-segment-button value="lost">Lost</ion-segment-button>
       <ion-segment-button value="found">Found</ion-segment-button>
       <ion-segment-button value="all">All</ion-segment-button>
-      <ion-segment-button value="resolved">Solved</ion-segment-button>
+      <ion-segment-button value="solved">Solved</ion-segment-button>
       <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->
     </ion-segment>
 
@@ -75,6 +75,23 @@
               <p>{{ image.time_added | date}}</p>
             </ion-item>
           </ion-list>
+
+          <ion-list *ngSwitchCase="'solved'">
+            <!--style this card differently to show that these are solved
+            We can have lost solved as one color and found solved as another-->
+              <p>solved</p>
+              <!-- I use subscribe instead of async -->
+              <ion-item *ngFor="let image of solvedPostArray">
+                <ion-thumbnail item-start>
+                  <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+                    [alt]="image.description" (click)="goToDetailed(image)">
+                </ion-thumbnail>
+                <h1>{{ image.title }}</h1>
+                <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+                <p>{{ image.description }}</p>
+                <p>{{ image.time_added | date}}</p>
+              </ion-item>
+            </ion-list>
   </div>
 
 

@@ -24,6 +24,8 @@ export class MyPostsPage {
   userId = localStorage.getItem('user_id');
   combineArrTemp: Pic[]= [];
   allPostArray:  Pic[];
+  solvedPostArray:  Pic[];
+
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -87,6 +89,23 @@ export class MyPostsPage {
   // takes all components from lost and found arrays and REsorts them by time
   createAllArr() {
     this.allPostArray = this.mediaProvider.sortMedia(this.combineArrTemp);
+    console.log('all array >>>>>>>>>>>>>>>>',this.allPostArray);
+
+
+    setTimeout(()=>{
+      this.solvedPostArray= this.allPostArray.filter( img => img.resolvedStatus === true);
+      this.solvedPostArray = this.mediaProvider.sortMedia(this.solvedPostArray);
+      console.log('A test filter for the tag', this.solvedPostArray);
+    },1500)
+
+
+    /* this.solvedPostArray = this.allPostArray.filter((img: Pic) => {
+      console.log('img.tags ',img.tags);
+      console.log('resolved should be the tag');
+      console.log('We have come this far', img);
+
+       return img.tags.filter( item => item.tag ==='resolved');
+    });*/
   }
 
 }
