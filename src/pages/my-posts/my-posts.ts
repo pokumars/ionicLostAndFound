@@ -17,11 +17,13 @@ import { Pic } from '../../interfaces/Pic';
 })
 export class MyPostsPage {
   type: string = "all";
-  allPicArray: Observable<Pic[]>;
+  // allPicArray: Observable<Pic[]>;
   lostPicArray: Pic[];
   foundPicArray: Pic[];
   pet: string = "puppies";
-  userId = localStorage.getItem('user_id')
+  userId = localStorage.getItem('user_id');
+  combineArrTemp: Pic[]= [];
+  allPostArray:  Pic[];
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -30,18 +32,17 @@ export class MyPostsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyPostsPage');
-    this.getAllMyPosts();
-    this.getAllMyLost();
     this.getAllMyFound();
+    this.getAllMyLost();
   }
 
-  getAllMyPosts() {
+ /*  getAllMyPosts() {
     // console.log('my userId >>>>>', this.userId)
     this.allPicArray = this.mediaProvider.getUsersMedia(this.userId);
     this.allPicArray.subscribe(res => console.log('11111111',res));
     // console.log('array==>>>', this.allPicArray)
   }
-
+ */
   //get all lost posts of a user
   getAllMyLost() {
     this.mediaProvider.getAllMedia('lost').then(
@@ -52,9 +53,12 @@ export class MyPostsPage {
         this.lostPicArray = results.filter((img) => {
           if (img.user_id.toString() === this.userId) {
             console.log('your lost img',img);
+            this.combineArrTemp.push(img);
             return img;
           }
-        })
+        });
+        console.log('2combo after getAllMyLost >>>>>>>>>>>>>>>>', this.combineArrTemp);
+        this.createAllArr();
       }
     )
   }
@@ -69,23 +73,20 @@ export class MyPostsPage {
         this.foundPicArray = results.filter((img) => {
           if (img.user_id.toString() === this.userId) {
             console.log('your found img',img);
+            this.combineArrTemp.push(img);
             return img;
           }
         });
+        this.createAllArr();
+        console.log('1 combo after getAllMyFound >>>>>>>>>>>>>>>>', this.combineArrTemp);
 
       }
     );
-
-
-
   }
 
-
-
-
-
-
-
-
+  // takes all components from lost and found arrays and REsorts them by time
+  createAllArr() {
+    this.allPostArray = this.mediaProvider.sortMedia(this.combineArrTemp);
+  }
 
 }

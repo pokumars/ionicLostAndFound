@@ -13,9 +13,11 @@
   <ion-toolbar>
 
     <ion-segment [(ngModel)]="type">
-      <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button value="lost">Lost</ion-segment-button>
       <ion-segment-button value="found">Found</ion-segment-button>
+      <ion-segment-button value="all">All</ion-segment-button>
+      <ion-segment-button value="resolved">Solved</ion-segment-button>
+      <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->
     </ion-segment>
 
   </ion-toolbar>
@@ -26,10 +28,11 @@
 <ion-content padding>
 
   <div [ngSwitch]="type">
-    <ion-list *ngSwitchCase="'all'">
-        <p>All</p>
 
-        <ion-item *ngFor="let image of allPicArray | async">
+      <ion-list *ngSwitchCase="'all'">
+        <p>combo</p>
+
+        <ion-item *ngFor="let image of allPostArray">
           <ion-thumbnail item-start>
             <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
               [alt]="image.description" (click)="goToDetailed(image)">
