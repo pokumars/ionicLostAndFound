@@ -3,13 +3,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/Pic';
+import { PostPage } from '../post/post';
 
-/**
- * Generated class for the MyPostsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @Component({
   selector: 'page-my-posts',
@@ -98,6 +94,11 @@ export class MyPostsPage {
       this.solvedPostArray = this.mediaProvider.sortMedia(this.solvedPostArray);
       console.log('A test filter for the tag', this.solvedPostArray);
     },1500)
+  }
+
+  // go to detailed post
+  goToDetailed(post: Pic) {
+    this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
 
 }
