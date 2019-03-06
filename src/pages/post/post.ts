@@ -7,6 +7,7 @@ import { MenuController } from 'ionic-angular';
 import { PopoverComponent } from "../../components/popover/popover";
 import { DropdownpagePage } from "../dropdownpage/dropdownpage";
 import {EditPostPage} from "../edit-post/edit-post";
+import {ConfirmPage} from "../confirm/confirm";
 
 /**
  * Generated class for the PostPage page.
@@ -75,17 +76,25 @@ export class PostPage {
   }
   // resolve a post
   resolvePost() {
-    this.mediaProvider.addTag('resolved',this.post.file_id).subscribe(ans => {
-      console.log(ans);
-      this.updatePost();
-    });
+    this.presentConfirm('Resolve').then(ans => {
+      if(ans) {
+        this.mediaProvider.addTag('resolved',this.post.file_id).subscribe(ans => {
+          console.log(ans);
+          this.updatePost();
+        });
+      }
+    })
   }
   // remove a post
   removePost() {
-    this.mediaProvider.deleteMedia(this.post.file_id).subscribe(res => {
-      console.log(res);
-      this.navCtrl.pop().catch(err => console.log(err));
-    })
+    this.presentConfirm('Remove').then(ans => {
+      if(ans) {
+        this.mediaProvider.deleteMedia(this.post.file_id).subscribe(res => {
+          console.log(res);
+          this.navCtrl.pop().catch(err => console.log(err));
+        })
+      }
+    });
   }
   // edit post
   editPost() {
@@ -138,6 +147,30 @@ export class PostPage {
           break;
       }
     })
+  }
+  // ask for user confirmation
+  presentConfirm(input: string) {
+    return new Promise(resolve => {
+      const popover = this.popoverController.create(ConfirmPage,{'input': input}, {
+        enableBackdropDismiss: false,
+        showBackdrop: true
+      });
+      popover.present({
+        animate: true,
+      }).catch(err => console.log(err));
+      popover.onDidDismiss(() => {
+        let choice = localStorage.getItem('confirm-ask');
+        console.log('user choice is:' + choice);
+        switch (choice) {
+          case 'no':
+            resolve(false);
+            break;
+          case 'yes':
+            resolve(true);
+            break;
+        }
+      })
+    });
   }
   // testing alert
   // async alertDelete() {

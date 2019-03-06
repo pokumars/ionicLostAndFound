@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <form (ngSubmit)="modifyPost()">
+  <form>
     <ion-item>
       <ion-label>Title</ion-label>
       <ion-input [(ngModel)]="title" type="text" name="title" (keyup)="formCheck()"></ion-input>
@@ -23,6 +23,7 @@
       <ion-label>Description</ion-label>
       <ion-input [(ngModel)]="description" type="text" name="description" (keyup)="formCheck()"></ion-input>
     </ion-item>
-    <button ion-button type="submit" block *ngIf="formValid">Submit</button>
+    <button ion-button type="submit" block *ngIf="formValid" (click)="presentPopover($event)">Submit</button>
+    <button ion-button block (click)="cancelModifyPost()">Cancel</button>
   </form>
 </ion-content>

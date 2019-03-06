@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
+import { DropdownpagePage } from "../dropdownpage/dropdownpage";
+import {ConfirmPage} from "../confirm/confirm";
 
 /**
  * Generated class for the EditPostPage page.
@@ -22,7 +24,8 @@ export class EditPostPage {
   id: number = this.navParams.get('file_id');
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private mediaProvider: MediaProvider) {
+              private mediaProvider: MediaProvider,
+              private popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
@@ -46,6 +49,31 @@ export class EditPostPage {
     this.mediaProvider.editMedia(this.id,this.sentData).subscribe(res => {
       console.log(res);
       this.navCtrl.pop().catch(err => console.log(err));
+    })
+  }
+  // cancel
+  cancelModifyPost() {
+    this.navCtrl.pop().catch(err => console.log(err));
+  }
+  // ask for user confirmation
+  presentPopover(ev: any) {
+    const popover = this.popoverCtrl.create(ConfirmPage,{'input': 'Edit'}, {
+      enableBackdropDismiss: false,
+      showBackdrop: true
+    });
+    popover.present({
+      animate: true,
+    }).catch(err => console.log(err));
+    popover.onDidDismiss(() => {
+      let choice = localStorage.getItem('confirm-ask');
+      console.log('user choice is:' + choice);
+      switch (choice) {
+        case 'no':
+          break;
+        case 'yes':
+          this.modifyPost();
+          break;
+      }
     })
   }
 }
