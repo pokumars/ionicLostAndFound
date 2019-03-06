@@ -5,8 +5,8 @@
 </ion-header>
 <ion-content padding *ngIf="post" style="position: relative;" [ngStyle]="{'background-color': post.backgroundColor, 'color': post.color}">
   <button *ngIf="post.user_id === userId" (click)="presentPopover($event)">Menu</button>
-  <h5>{{ post.user_id | userInfo: 'name' | async }}</h5>
-  <img [src]="(post.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 40px;">
+  <h5 (click)="goToProfile(post.user_id)" style="font-weight: bolder">{{ post.user_id | userInfo: 'name' | async }}</h5>
+  <img [src]="(post.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 40px;" (click)="goToProfile(post.user_id)">
   <p style="font-size: smaller">{{ post.time_added | date}}</p>
   <img [src]="(post.filename | thumbnail: 'medium')" [alt]="post.title">
   <p>{{ post.description }}</p>
