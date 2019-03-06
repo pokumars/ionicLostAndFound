@@ -1,9 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-<<<<<<< HEAD
 import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
-=======
-import { IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
->>>>>>> myPosts2
 import { User } from '../../interface/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MediaProvider } from '../../providers/media/media';

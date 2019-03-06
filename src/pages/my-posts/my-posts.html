@@ -12,8 +12,8 @@
 
   <ion-toolbar>
     <ion-segment [(ngModel)]="type">
-      <ion-segment-button value="lost">Lost</ion-segment-button>
-      <ion-segment-button value="found">Found</ion-segment-button>
+      <ion-segment-button value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
+      <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
       <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button value="solved">Solved</ion-segment-button>
       <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->

@@ -3,12 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/Pic';
-<<<<<<< HEAD
 import {PostPage} from "../post/post";
-=======
-import { PostPage } from '../post/post';
-
->>>>>>> myPosts2
 
 
 @Component({
@@ -52,7 +47,7 @@ export class MyPostsPage {
             return img;
           }
         });
-        console.log('2combo after getAllMyLost >>>>>>>>>>>>>>>>', this.combineArrTemp);
+        console.log('2combo after getAllMyLost ......................', this.combineArrTemp);
         // sort array by time
         this.lostPicArray = this.mediaProvider.sortMedia(this.lostPicArray);
 
@@ -65,7 +60,7 @@ export class MyPostsPage {
   getAllMyFound() {
     this.mediaProvider.getAllMedia('found').then(
       (results: Pic[]) => {// gives all posts with found tag
-        console.log('found posts >>>>>>',results);
+        console.log('found posts ........ ',results);
 
         //filter that for ones that were made by this user
         this.foundPicArray = results.filter((img) => {
@@ -81,7 +76,7 @@ export class MyPostsPage {
 
         // setup the array containing all myposts. add lost and ound and sort by time
         this.createAllArr();
-        console.log('1 combo after getAllMyFound >>>>>>>>>>>>>>>>', this.combineArrTemp);
+        console.log('1 combo after getAllMyFound ............................', this.combineArrTemp);
       }
     );
   }
@@ -89,7 +84,7 @@ export class MyPostsPage {
   // takes all components from lost and found arrays and REsorts them by time
   createAllArr() {
     this.allPostArray = this.mediaProvider.sortMedia(this.combineArrTemp);
-    console.log('all array >>>>>>>>>>>>>>>>',this.allPostArray);
+    console.log('all array .............', this.allPostArray);
 
 
     setTimeout(()=>{
@@ -103,8 +98,4 @@ export class MyPostsPage {
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> myPosts2
 }

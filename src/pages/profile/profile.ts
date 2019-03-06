@@ -34,10 +34,13 @@ export class ProfilePage {
   myPosts = MyPostsPage;
 
   // concerning the posts
-  type: string = "all";
   allPicArray: Observable<Pic[]>;
+  type: string = "all";
   lostPicArray: Pic[];
   foundPicArray: Pic[];
+  allPostArray:  Pic[];
+  combineArrTemp: Pic[]= [];
+  solvedPostArray:  Pic[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -51,6 +54,8 @@ export class ProfilePage {
   ionViewDidLoad() {
     this.updateUserData();
     console.log('ionViewDidLoad ProfilePage');
+    this.getAllMyLost();
+    this.getAllMyFound();
     if (this.platform.is('android')) {
       this.isAndroid = true;
     } else {
@@ -67,9 +72,7 @@ export class ProfilePage {
     this.userId = +localStorage.getItem('user_id');// the plus to convert userid to number to be used in user info pipe
     this.username = localStorage.getItem('username');
     this.userMail = localStorage.getItem('email');
-    this.getAllMyPosts();
-    this.getAllMyLost();
-    this.getAllMyFound()
+
   }
   // log user out
   onLogout(){
@@ -170,6 +173,95 @@ export class ProfilePage {
       uploadSpinner.dismiss().catch(error => console.log(error));
     });
   }
+
+  //get all lost posts of a user
+  getAllMyLost() {
+    this.mediaProvider.getAllMedia('lost').then(
+      (results: Pic[]) => {// gives all posts with lost tag
+        console.log('lost posts >>>>>>',results);
+
+        //filter that for ones that were made by this user
+        this.lostPicArray = results.filter((img) => {
+          if (img.user_id === this.userId) {
+            console.log('your lost img',img);
+            this.combineArrTemp.push(img);
+            return img;
+          }
+        });
+        console.log('2combo after getAllMyLost ......................', this.combineArrTemp);
+        // sort array by time
+        this.lostPicArray = this.mediaProvider.sortMedia(this.lostPicArray);
+
+        // setup the array containing all myposts. add lost and ound and sort by time
+        this.createAllArr();
+      }
+    )
+  }
+
+  getAllMyFound() {
+    this.mediaProvider.getAllMedia('found').then(
+      (results: Pic[]) => {// gives all posts with found tag
+        console.log('found posts ........ ',results);
+
+        //filter that for ones that were made by this user
+        this.foundPicArray = results.filter((img) => {
+          if (img.user_id === this.userId) {
+            console.log('your found img',img);
+            this.combineArrTemp.push(img);
+            return img;
+          }
+        });
+
+        // sort array by time
+        this.foundPicArray = this.mediaProvider.sortMedia(this.foundPicArray);
+
+        // setup the array containing all myposts. add lost and ound and sort by time
+        this.createAllArr();
+        console.log('1 combo after getAllMyFound ............................', this.combineArrTemp);
+      }
+    );
+  }
+
+  // takes all components from lost and found arrays and REsorts them by time
+  createAllArr() {
+    this.allPostArray = this.mediaProvider.sortMedia(this.combineArrTemp);
+    console.log('all array .............', this.allPostArray);
+
+
+    setTimeout(()=>{
+      this.solvedPostArray= this.allPostArray.filter( img => img.resolvedStatus === true);
+      this.solvedPostArray = this.mediaProvider.sortMedia(this.solvedPostArray);
+      console.log('A test filter for the tag', this.solvedPostArray);
+    },1500)
+  }
+
+  // go to detailed post
+  goToDetailed(post: Pic) {
+    this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
   // getting users post
   getAllMyPosts() {
     // console.log('my userId >>>>>', this.userId)
@@ -214,6 +306,6 @@ export class ProfilePage {
   // go to detailed post
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
-  }
+  } */
   // check if user already have avatar
 }
