@@ -3,14 +3,13 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/Pic';
+<<<<<<< HEAD
 import {PostPage} from "../post/post";
+=======
+import { PostPage } from '../post/post';
 
-/**
- * Generated class for the MyPostsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+>>>>>>> myPosts2
+
 
 @Component({
   selector: 'page-my-posts',
@@ -104,4 +103,8 @@ export class MyPostsPage {
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> myPosts2
 }

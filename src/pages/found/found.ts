@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { UploadPage } from '../upload/upload';
 import { HomePage } from '../home/home';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/Pic';
 import { MediaProvider } from '../../providers/media/media';
 import { PostPage } from '../post/post';
+import { isEmpty } from 'rxjs/operator/isEmpty';
 
 /**
  * Generated class for the FoundPage page.
@@ -25,15 +26,27 @@ export class FoundPage {
   homePage = HomePage;
   lost = false;
   picArray: {};
+  testArr: {};
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
-     private mediaProvider: MediaProvider) {
+     private mediaProvider: MediaProvider,
+     private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FoundPage');
     this.getAllFile();
+
+    setTimeout(()=> {
+      if(this.picArray === undefined){
+        console.log('picArray test success', this.picArray)
+        this.presentToast();
+
+      } else{
+        console.log('picArray fail', this.picArray)
+      }
+    }, 3000);
   }
 
   ionViewWillEnter() {
@@ -60,6 +73,20 @@ export class FoundPage {
   }
   toProfilePage(){
      // this.navCtrl.setRoot(ProfilePage);
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message:'Your internet connection may be down. Please refresh',
+      showCloseButton: true,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(()=>{
+      console.log('internet down selected toast');
+    });
+
+    toast.present();
   }
 
 }
