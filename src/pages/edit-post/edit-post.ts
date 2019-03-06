@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 
 /**
@@ -22,7 +22,8 @@ export class EditPostPage {
   id: number = this.navParams.get('file_id');
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private mediaProvider: MediaProvider) {
+              private mediaProvider: MediaProvider,
+              private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -45,7 +46,21 @@ export class EditPostPage {
     console.log(this.sentData);
     this.mediaProvider.editMedia(this.id,this.sentData).subscribe(res => {
       console.log(res);
+      this.presentToast();
       this.navCtrl.pop().catch(err => console.log(err));
     })
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message:'Post Modified',
+      duration: 3000,
+    });
+
+    toast.onDidDismiss(()=>{
+      console.log('post modified toast');
+    });
+
+    toast.present();
   }
 }

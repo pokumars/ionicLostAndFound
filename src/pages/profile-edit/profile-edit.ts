@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { User } from '../../interface/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MediaProvider } from '../../providers/media/media';
@@ -36,7 +36,8 @@ export class ProfileEditPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private authProvider: AuthProvider,
-              private mediaProvider: MediaProvider) {
+              private mediaProvider: MediaProvider,
+              private toastCtrl: ToastController) {
   }
   // when page is turned on
   ionViewDidLoad() {
@@ -114,8 +115,10 @@ export class ProfileEditPage {
         if(this.user.email !== '') {
           localStorage.setItem('email', this.user.email);
         }
+        this.presentToast();
         this.navCtrl.pop().catch(err => console.log(err));
       })
+
     } else {
       this.oldPassword = '';
       this.confirmValid = false;
@@ -124,5 +127,17 @@ export class ProfileEditPage {
   // cancel confirmation
   cancelConfirm() {
     this.confirmationCheck = false;
+  }
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message:'Profile details changed',
+      duration: 3000,
+    });
+
+    toast.onDidDismiss(()=>{
+      console.log('user detail modified toast');
+    });
+
+    toast.present();
   }
 }

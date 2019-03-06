@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Chooser } from '@ionic-native/chooser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -43,6 +43,7 @@ export class UploadPage {
               private loadCtrl: LoadingController,
               private chooser: Chooser,
               private platform: Platform,
+              private toastCtrl: ToastController,
               private camera: Camera) {
   }
 
@@ -105,6 +106,7 @@ export class UploadPage {
       this.fileValid = this.isImage || this.isVideo || this.isAudio;
       if (this.fileValid) {
         this.chosenFile = new Blob([res.data], { type: res.mediaType });
+        this.presentToast();
       }
       console.log(this.chosenFile);
       this.pathToFile = res.dataURI;
@@ -181,6 +183,7 @@ export class UploadPage {
       this.chosenFile = this.dataURItoBlob(base64Image);
       console.log(this.chosenFile);
       this.fileValid = true;
+      if (this.fileValid) this.presentToast();
       this.isImage = true;
     }, (err) => {
       console.log(err);
@@ -189,5 +192,18 @@ export class UploadPage {
   // checking found lost choice value
   checkChoice() {
     console.log(this.choice);
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message:'File Selected',
+      duration: 2000,
+    });
+
+    toast.onDidDismiss(()=>{
+      console.log('dismissed image selected toast');
+    });
+
+    toast.present();
   }
 }
