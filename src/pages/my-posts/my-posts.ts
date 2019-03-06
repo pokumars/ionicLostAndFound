@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { Observable } from 'rxjs';
 import { Pic } from '../../interfaces/Pic';
+import {PostPage} from "../post/post";
 
 /**
  * Generated class for the MyPostsPage page.
@@ -24,7 +25,6 @@ export class MyPostsPage {
   combineArrTemp: Pic[]= [];
   solvedPostArray:  Pic[];
 
-  pet: string = "puppies";
   userId = localStorage.getItem('user_id');
 
 
@@ -100,4 +100,8 @@ export class MyPostsPage {
     },1500)
   }
 
+  // go to detailed post
+  goToDetailed(post: Pic) {
+    this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
+  }
 }

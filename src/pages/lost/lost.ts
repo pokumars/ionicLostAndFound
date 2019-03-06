@@ -7,6 +7,7 @@ import { MediaProvider } from '../../providers/media/media';
 import { Observable } from "rxjs";
 import { Pic } from "../../interfaces/Pic";
 import { PostPage } from '../post/post';
+import {OtherUserPage} from "../other-user/other-user";
 
 
 /**

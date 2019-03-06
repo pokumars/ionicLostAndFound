@@ -28,10 +28,6 @@ export class DropdownpagePage {
   rememberPost(mem: string) {
     console.log('click');
     localStorage.setItem('mem', mem);
-    this.navCtrl.pop()
-      .then(() => {
-        console.log('do something');
-      })
-      .catch(err => console.log(err));
+    this.navCtrl.pop().catch(err => console.log(err));
   }
 }

@@ -2,7 +2,6 @@
 
   <ion-navbar>
     <ion-title>profile</ion-title>
-    <button (click)="editProfile()">Edit Profile</button>
     <ion-buttons end>
       <button ion-button solid color="danger" (click)="onLogout()">Logout</button>
     </ion-buttons>
@@ -12,29 +11,64 @@
 
 <ion-content padding>
 
-  <ion-avatar >
+  <ion-avatar *ngIf="userId">
     <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
     <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
     <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
-    <img [src]="(userId | userInfo: 'avatar': 'small' | async)" (click)="chooseNewProfile()">
+    <img [src]="(userId | userInfo: 'avatar': 'small' | async)" (click)="chooseNewProfile()" alt="Change your profile">
   </ion-avatar>
     <p>{{ avatar }}  </p>
     <p>{{ username }}</p>
     <p>{{ userMail }}</p>
-    <button ion-button block [navPush]="myPosts">View my previous posts</button>
-  <ion-item>
-    <ion-label>LOST</ion-label>
-  </ion-item>
-  <ion-item>
-    <p>{{ userId | userInfo: 'lost-stat' | async }}</p>
-  </ion-item>
-  <ion-item>
-    <ion-label>FOUND</ion-label>
-  </ion-item>
-  <ion-item>
-    <p>{{ userId | userInfo: 'found-stat' | async }}</p>
-  </ion-item>
-
+    <button ion-button (click)="editProfile()">Edit Profile</button>
+    <!--<button ion-button block [navPush]="myPosts">View my previous posts</button>-->
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="all">All</ion-segment-button>
+      <ion-segment-button value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
+      <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <div [ngSwitch]="type">
+    <ion-list *ngSwitchCase="'all'">
+      <p>All</p>
+      <ion-item *ngFor="let image of allPicArray | async">
+        <ion-thumbnail item-start>
+          <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+               [alt]="image.description" (click)="goToDetailed(image)">
+        </ion-thumbnail>
+        <h1>{{ image.title }}</h1>
+        <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+        <h5>{{ image.time_added | date}}</h5>
+      </ion-item>
+    </ion-list>
+    <ion-list  *ngSwitchCase="'lost'">
+      <p>Lost</p>
+      <!-- I use subscribe instead of async -->
+      <ion-item *ngFor="let image of lostPicArray">
+        <ion-thumbnail item-start>
+          <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+               [alt]="image.description" (click)="goToDetailed(image)">
+        </ion-thumbnail>
+        <h1>{{ image.title }}</h1>
+        <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+        <h5>{{ image.time_added | date}}</h5>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'found'">
+      <p>Found</p>
+      <!-- I use subscribe instead of async -->
+      <ion-item *ngFor="let image of foundPicArray">
+        <ion-thumbnail item-start>
+          <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+               [alt]="image.description" (click)="goToDetailed(image)">
+        </ion-thumbnail>
+        <h1>{{ image.title }}</h1>
+        <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+        <h5>{{ image.time_added | date}}</h5>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 
 

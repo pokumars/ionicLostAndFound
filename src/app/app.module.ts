@@ -28,8 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Chooser } from '@ionic-native/chooser';
 import { Camera } from '@ionic-native/camera';
 import { ComponentsModule } from '../components/components.module';
-import {DropdownpagePage} from "../pages/dropdownpage/dropdownpage";
-import {EditPostPage} from "../pages/edit-post/edit-post";
+import { DropdownpagePage } from '../pages/dropdownpage/dropdownpage';
+import { EditPostPage } from '../pages/edit-post/edit-post';
+import { ConfirmPage } from '../pages/confirm/confirm';
+import {OtherUserPage} from "../pages/other-user/other-user";
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import {EditPostPage} from "../pages/edit-post/edit-post";
     ProfilePage,
     DropdownpagePage,
     MyPostsPage,
-    EditPostPage
+    EditPostPage,
+    ConfirmPage,
+    OtherUserPage
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,9 @@ import {EditPostPage} from "../pages/edit-post/edit-post";
     ProfilePage,
     DropdownpagePage,
     MyPostsPage,
-    EditPostPage
+    EditPostPage,
+    ConfirmPage,
+    OtherUserPage
   ],
   providers: [
     StatusBar,
