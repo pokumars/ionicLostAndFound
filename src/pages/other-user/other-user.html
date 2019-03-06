@@ -26,10 +26,10 @@
     <ion-list *ngSwitchCase="'all'">
       <p>All</p>
 
-      <ion-item *ngFor="let image of allPicArray | async">
+      <ion-item *ngFor="let image of allPicArray | async" (click)="goToDetailed(image)">
         <ion-thumbnail item-start>
           <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-               [alt]="image.description" (click)="goToDetailed(image)">
+               [alt]="image.description">
         </ion-thumbnail>
         <h1>{{ image.title }}</h1>
         <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
@@ -42,10 +42,10 @@
     <ion-list  *ngSwitchCase="'lost'">
       <p>Lost</p>
       <!-- I use subscribe instead of async -->
-      <ion-item *ngFor="let image of lostPicArray">
+      <ion-item *ngFor="let image of lostPicArray" (click)="goToDetailed(image)">
         <ion-thumbnail item-start>
           <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-               [alt]="image.description" (click)="goToDetailed(image)">
+               [alt]="image.description">
         </ion-thumbnail>
         <h1>{{ image.title }}</h1>
         <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
@@ -58,10 +58,10 @@
     <ion-list *ngSwitchCase="'found'">
       <p>Found</p>
       <!-- I use subscribe instead of async -->
-      <ion-item *ngFor="let image of foundPicArray">
+      <ion-item *ngFor="let image of foundPicArray" (click)="goToDetailed(image)">
         <ion-thumbnail item-start>
           <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-               [alt]="image.description" (click)="goToDetailed(image)">
+               [alt]="image.description">
         </ion-thumbnail>
         <h1>{{ image.title }}</h1>
         <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
