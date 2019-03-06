@@ -14,12 +14,12 @@
   <ion-textarea [(ngModel)]="comment" *ngIf="!post.resolvedStatus"></ion-textarea>
   <button ion-button *ngIf="comment!==''" (click)="sendComment()">send</button>
   <ion-list *ngIf="comments.length !== 0">
-    <ion-item *ngFor="let cm of comments" style="position: relative;">
-      <img [src]="(cm.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 20px;">
-      <h4 style="color: lightpink">{{ cm.user_id | userInfo: 'name' | async }}</h4>
+    <ion-item *ngFor="let cm of comments" style="position: relative;" [ngStyle]="{'background-color': post.backgroundColor, 'color': post.color}">
+      <img [src]="(cm.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 20px;" (click)="goToProfile(cm.user_id)">
+      <button style="background-color: lightpink; color: #222222" (click)="goToProfile(cm.user_id)">{{ cm.user_id | userInfo: 'name' | async }}</button>
       <p>{{ cm.comment }}</p>
       <p style="font-size: 3px">{{cm.time_added}}</p>
-      <button style="position: absolute; right: 1px; top: 1px" *ngIf="userId===cm.user_id" (click)="deleteComments(cm.comment_id)">x</button>
+      <button style="position: absolute; right: 1px; top: 1px" *ngIf="(userId===cm.user_id) && (post.resolvedStatus===false)" (click)="deleteComments(cm.comment_id)">x</button>
     </ion-item>
   </ion-list>
 </ion-content>

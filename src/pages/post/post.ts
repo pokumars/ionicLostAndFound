@@ -8,6 +8,8 @@ import { PopoverComponent } from "../../components/popover/popover";
 import { DropdownpagePage } from "../dropdownpage/dropdownpage";
 import {EditPostPage} from "../edit-post/edit-post";
 import {ConfirmPage} from "../confirm/confirm";
+import {OtherUserPage} from "../other-user/other-user";
+import {ProfilePage} from "../profile/profile";
 
 /**
  * Generated class for the PostPage page.
@@ -68,11 +70,14 @@ export class PostPage {
   }
   // delete comment by own user
   deleteComments(comment_id: number) {
-    console.log('trying to delete comments id: ' + comment_id);
-      this.mediaProvider.deleteComment(comment_id).subscribe(ans => {
-        console.log(ans);
-        this.getComments();
-      })
+    this.presentConfirm('delete').then(ans => {
+      if(ans) {
+        this.mediaProvider.deleteComment(comment_id).subscribe(ans => {
+          console.log(ans);
+          this.getComments();
+        })
+      }
+    });
   }
   // resolve a post
   resolvePost() {
@@ -172,27 +177,12 @@ export class PostPage {
       })
     });
   }
-  // testing alert
-  // async alertDelete() {
-  //   console.log('alert');
-  //   const alert = await this.alertCtrl.create({
-  //     message: 'This is an alert message.',
-  //     buttons: ['OK']
-  //   });
-  //   await alert.present();
-  // }
-  // test long press
-  // longpress() {
-  //   console.log('testing long press');
-  // }
-  // pressed() {
-  //   console.log('pressed');
-  // }
-  // active() {
-  //   console.log('active');
-  // }
-  // released() {
-  //   console.log('released');
-  // }
-  // pop over
+  // go to other's profile
+  goToProfile(id: number) {
+    if(id == this.userId) {
+      this.navCtrl.push(ProfilePage).catch(err => console.log(err));
+    } else {
+      this.navCtrl.push(OtherUserPage, {'id' : id}).catch(err => console.log(err));
+    }
+  }
 }

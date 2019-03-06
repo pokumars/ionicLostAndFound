@@ -1,8 +1,9 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
 import { User } from '../../interface/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MediaProvider } from '../../providers/media/media';
+import {ConfirmPage} from "../confirm/confirm";
 
 /**
  * Generated class for the ProfileEditPage page.
@@ -36,7 +37,8 @@ export class ProfileEditPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private authProvider: AuthProvider,
-              private mediaProvider: MediaProvider) {
+              private mediaProvider: MediaProvider,
+              private popoverCtrl: PopoverController) {
   }
   // when page is turned on
   ionViewDidLoad() {
@@ -103,18 +105,24 @@ export class ProfileEditPage {
     let correctOldPassword = localStorage.getItem('password');
     console.log(correctOldPassword);
     if (this.oldPassword === correctOldPassword) {
-      this.mediaProvider.modifyUserData(this.sentData).subscribe(ans => {
-        console.log(ans);
-        if(this.user.username !== '') {
-          localStorage.setItem('username', this.user.username);
+      this.presentConfirm('Modify').then(ans => {
+        if(ans){
+          this.mediaProvider.modifyUserData(this.sentData).subscribe(ans => {
+            console.log(ans);
+            if(this.user.username !== '') {
+              localStorage.setItem('username', this.user.username);
+            }
+            if(this.user.password !== '') {
+              localStorage.setItem('password', this.user.password);
+            }
+            if(this.user.email !== '') {
+              localStorage.setItem('email', this.user.email);
+            }
+            this.navCtrl.pop().catch(err => console.log(err));
+          })
+        } else {
+          this.confirmationCheck = false;
         }
-        if(this.user.password !== '') {
-          localStorage.setItem('password', this.user.password);
-        }
-        if(this.user.email !== '') {
-          localStorage.setItem('email', this.user.email);
-        }
-        this.navCtrl.pop().catch(err => console.log(err));
       })
     } else {
       this.oldPassword = '';
@@ -124,5 +132,29 @@ export class ProfileEditPage {
   // cancel confirmation
   cancelConfirm() {
     this.confirmationCheck = false;
+  }
+  // ask for user confirmation
+  presentConfirm(input: string) {
+    return new Promise(resolve => {
+      const popover = this.popoverCtrl.create(ConfirmPage,{'input': input}, {
+        enableBackdropDismiss: false,
+        showBackdrop: true
+      });
+      popover.present({
+        animate: true,
+      }).catch(err => console.log(err));
+      popover.onDidDismiss(() => {
+        let choice = localStorage.getItem('confirm-ask');
+        console.log('user choice is:' + choice);
+        switch (choice) {
+          case 'no':
+            resolve(false);
+            break;
+          case 'yes':
+            resolve(true);
+            break;
+        }
+      })
+    });
   }
 }

@@ -8,6 +8,8 @@ import { ProfileEditPage } from "../profile-edit/profile-edit";
 import { Chooser } from '@ionic-native/chooser';
 import { LoadingController } from 'ionic-angular';
 import { MyPostsPage } from '../my-posts/my-posts';
+import {Observable} from "rxjs";
+import {PostPage} from "../post/post";
 
 /**
  * Generated class for the ProfilePage page.
@@ -31,6 +33,11 @@ export class ProfilePage {
   isAndroid = false; isWindows = false; isImage = false;
   myPosts = MyPostsPage;
 
+  // concerning the posts
+  type: string = "all";
+  allPicArray: Observable<Pic[]>;
+  lostPicArray: Pic[];
+  foundPicArray: Pic[];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -60,29 +67,11 @@ export class ProfilePage {
     this.userId = +localStorage.getItem('user_id');// the plus to convert userid to number to be used in user info pipe
     this.username = localStorage.getItem('username');
     this.userMail = localStorage.getItem('email');
+    this.getAllMyPosts();
+    this.getAllMyLost();
+    this.getAllMyFound()
   }
-  //get profile pic
-  // getProfilePic() {
-  //   this.mediaProvider.getAvatar('profile').subscribe((item: TagsResponse[]) => {
-  //     // gets back an array of all items with the tag 'profile'.
-  //     item.filter((a) => {
-  //       // search the array for the specific one that has my userId
-  //       if (a.user_id.toString() === this.userId){
-  //         // use the filename of that as the file name to be passed to html.
-  //         this.avatarId = a.file_id;
-  //         this.avatar = a.filename;
-  //         console.log('avatar ---->', this.avatar);
-  //         //this.avatarUrl = this.baseUrl + this.avatar;
-  //         console.log('a.filename is ', a.filename);
-  //         this.avatarUrl = a.filename.split(".")[0] + '-tn160.' +'png';
-  //       }
-  //       else {
-  //         this.avatar = '62b4a67c2d87d891a6eae477866320d6.png';
-  //       }
-  //     })
-  //   }, error => console.log(error))
-  // }
-  //
+  // log user out
   onLogout(){
     console.log('onLogout()');
     localStorage.clear();
@@ -95,12 +84,12 @@ export class ProfilePage {
   }
   // choose new profile pic and delete old profile pic
   chooseNewProfile() {
+    const uploadSpinner = this.loadCtrl.create({
+      content: 'uploading to server',
+    });
     this.chooser.getFile('image/*').then(res => {
       //showing spinner
       let token = localStorage.getItem('token');
-      const uploadSpinner = this.loadCtrl.create({
-        content: 'uploading to server',
-      });
       uploadSpinner.present().catch(err => console.log(err));
       console.log('uploading this');
       console.log(res);
@@ -176,7 +165,55 @@ export class ProfilePage {
         })
       }
       // send avatar over if file valid
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+      uploadSpinner.dismiss().catch(error => console.log(error));
+    });
+  }
+  // getting users post
+  getAllMyPosts() {
+    // console.log('my userId >>>>>', this.userId)
+    this.allPicArray = this.mediaProvider.getUsersMedia(this.userId.toString());
+    this.allPicArray.subscribe(res => console.log('11111111',res));
+    // console.log('array==>>>', this.allPicArray)
+  }
+
+  //get all lost posts of a user
+  getAllMyLost() {
+    this.mediaProvider.getAllMedia('lost').then(
+      (results: Pic[]) => {// gives all posts with lost tag
+        console.log('lost posts >>>>>>',results);
+
+        //filter that for ones that were made by this user
+        this.lostPicArray = results.filter((img) => {
+          if (img.user_id === this.userId) {
+            console.log('your lost img',img);
+            return img;
+          }
+        })
+      }
+    )
+  }
+  // get all post tagged with found
+  getAllMyFound() {
+    this.mediaProvider.getAllMedia('found').then(
+      (results: Pic[]) => {// gives all posts with found tag
+        console.log('found posts >>>>>>',results);
+
+        //filter that for ones that were made by this user
+        this.foundPicArray = results.filter((img) => {
+          if (img.user_id === this.userId) {
+            console.log('your found img',img);
+            return img;
+          }
+        });
+
+      }
+    );
+  }
+  // go to detailed post
+  goToDetailed(post: Pic) {
+    this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
   // check if user already have avatar
 }

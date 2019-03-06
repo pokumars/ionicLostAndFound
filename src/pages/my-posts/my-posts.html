@@ -11,24 +11,19 @@
   </ion-navbar>
 
   <ion-toolbar>
-
     <ion-segment [(ngModel)]="type">
       <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button value="lost">Lost</ion-segment-button>
       <ion-segment-button value="found">Found</ion-segment-button>
     </ion-segment>
-
   </ion-toolbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'all'">
         <p>All</p>
-
         <ion-item *ngFor="let image of allPicArray | async">
           <ion-thumbnail item-start>
             <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
@@ -40,8 +35,6 @@
           <p>{{ image.time_added | date}}</p>
         </ion-item>
       </ion-list>
-
-
       <ion-list  *ngSwitchCase="'lost'">
           <p>Lost</p>
          <!-- I use subscribe instead of async -->
@@ -56,8 +49,6 @@
             <p>{{ image.time_added | date}}</p>
           </ion-item>
         </ion-list>
-
-
         <ion-list *ngSwitchCase="'found'">
             <p>Found</p>
             <!-- I use subscribe instead of async -->
@@ -73,7 +64,4 @@
             </ion-item>
           </ion-list>
   </div>
-
-
-
 </ion-content>

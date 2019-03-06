@@ -31,6 +31,7 @@ import { ComponentsModule } from '../components/components.module';
 import { DropdownpagePage } from '../pages/dropdownpage/dropdownpage';
 import { EditPostPage } from '../pages/edit-post/edit-post';
 import { ConfirmPage } from '../pages/confirm/confirm';
+import {OtherUserPage} from "../pages/other-user/other-user";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ConfirmPage } from '../pages/confirm/confirm';
     DropdownpagePage,
     MyPostsPage,
     EditPostPage,
-    ConfirmPage
+    ConfirmPage,
+    OtherUserPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { ConfirmPage } from '../pages/confirm/confirm';
     DropdownpagePage,
     MyPostsPage,
     EditPostPage,
-    ConfirmPage
+    ConfirmPage,
+    OtherUserPage
   ],
   providers: [
     StatusBar,

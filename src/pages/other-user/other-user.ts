@@ -1,44 +1,43 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
-import { Observable } from 'rxjs';
-import { Pic } from '../../interfaces/Pic';
+import {Observable} from "rxjs";
+import {Pic} from "../../interfaces/Pic";
 import {PostPage} from "../post/post";
 
 /**
- * Generated class for the MyPostsPage page.
+ * Generated class for the OtherUserPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
-  selector: 'page-my-posts',
-  templateUrl: 'my-posts.html',
+  selector: 'page-other-user',
+  templateUrl: 'other-user.html',
 })
-export class MyPostsPage {
+export class OtherUserPage {
   type: string = "all";
   allPicArray: Observable<Pic[]>;
   lostPicArray: Pic[];
   foundPicArray: Pic[];
-  userId = localStorage.getItem('user_id');
 
+  userId = 5;
   constructor(public navCtrl: NavController,
-     public navParams: NavParams,
-     private mediaProvider: MediaProvider) {
+              public navParams: NavParams,
+              private mediaProvider: MediaProvider) {
   }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MyPostsPage');
+    console.log('ionViewDidLoad OtherUserPage');
+    this.userId = this.navParams.get('id');
     this.getAllMyPosts();
     this.getAllMyLost();
     this.getAllMyFound();
   }
-
   getAllMyPosts() {
     // console.log('my userId >>>>>', this.userId)
-    this.allPicArray = this.mediaProvider.getUsersMedia(this.userId);
-    this.allPicArray.subscribe(res => console.log('11111111',res));
+    this.allPicArray = this.mediaProvider.getUsersMedia(this.userId.toString());
     // console.log('array==>>>', this.allPicArray)
   }
 
@@ -47,10 +46,9 @@ export class MyPostsPage {
     this.mediaProvider.getAllMedia('lost').then(
       (results: Pic[]) => {// gives all posts with lost tag
         console.log('lost posts >>>>>>',results);
-
         //filter that for ones that were made by this user
         this.lostPicArray = results.filter((img) => {
-          if (img.user_id.toString() === this.userId) {
+          if (img.user_id === this.userId) {
             console.log('your lost img',img);
             return img;
           }
@@ -58,7 +56,6 @@ export class MyPostsPage {
       }
     )
   }
-
   getAllMyFound() {
     this.mediaProvider.getAllMedia('found').then(
       (results: Pic[]) => {// gives all posts with found tag
@@ -66,7 +63,7 @@ export class MyPostsPage {
 
         //filter that for ones that were made by this user
         this.foundPicArray = results.filter((img) => {
-          if (img.user_id.toString() === this.userId) {
+          if (img.user_id === this.userId) {
             console.log('your found img',img);
             return img;
           }
