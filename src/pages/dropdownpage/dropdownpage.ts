@@ -30,26 +30,18 @@ export class DropdownpagePage {
   rememberPost(mem: string) {
     console.log('click');
     localStorage.setItem('mem', mem);
-    this.navCtrl.pop().catch(err => console.log(err));
+    // this.navCtrl.pop().catch(err => console.log(err));
     this.presentToast(mem);
-
-    this.navCtrl.pop()
-      .then(() => {
-        console.log('do something');
-      })
-      .catch(err => console.log(err));
   }
   presentToast(type: string) {
     let toast = this.toastCtrl.create({
       message:`${type} post`,
-      duration:3000,
+      duration: 3000,
       position: 'bottom'
     });
-
     toast.onDidDismiss(()=>{
       console.log('internet down selected toast');
     });
-
-    toast.present();
+    toast.present().then(() => this.navCtrl.pop().catch(err => console.log(err)));
   }
 }

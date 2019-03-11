@@ -104,8 +104,7 @@ export class MediaProvider {
   // add resolved status to file
   addResolved(mediaArray: Pic[]) {
     return new Promise(resolve => {
-      let resolved: Pic[] = [];
-      let unresolved: Pic[] = [];
+      let answer: Pic[] = [];
       this.http.get(this.baseUrl + 'tags/resolved').subscribe((ans:TagsResponse[]) => {
         for(let pic of mediaArray) {
           let found = false;
@@ -118,15 +117,15 @@ export class MediaProvider {
             pic.resolvedStatus = true;
             pic.backgroundColor = 'black';
             pic.color = 'white';
-            resolved.push(pic);
+            answer.push(pic);
           } else {
             pic.resolvedStatus = false;
             pic.backgroundColor = 'white';
             pic.color = 'black';
-            unresolved.push(pic);
+            answer.push(pic);
           }
         }
-        resolve(unresolved.concat(resolved));
+        resolve(answer);
       })
     })
   }

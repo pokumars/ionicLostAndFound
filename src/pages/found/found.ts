@@ -8,6 +8,7 @@ import { Pic } from '../../interfaces/Pic';
 import { MediaProvider } from '../../providers/media/media';
 import { PostPage } from '../post/post';
 import { isEmpty } from 'rxjs/operator/isEmpty';
+import {OtherUserPage} from "../other-user/other-user";
 
 /**
  * Generated class for the FoundPage page.
@@ -27,6 +28,7 @@ export class FoundPage {
   lost = false;
   picArray: {};
   testArr: {};
+  userid: number;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -37,10 +39,11 @@ export class FoundPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad FoundPage');
     this.getAllFile();
+    this.userid = +localStorage.getItem('user_id');
 
     setTimeout(()=> {
       if(this.picArray === undefined){
-        console.log('picArray test success', this.picArray)
+        console.log('picArray test success', this.picArray);
         this.presentToast();
 
       } else{
@@ -51,6 +54,7 @@ export class FoundPage {
 
   ionViewWillEnter() {
     this.getAllFile();
+    this.userid = +localStorage.getItem('user_id');
   }
 
   // get all files
@@ -88,5 +92,11 @@ export class FoundPage {
 
     toast.present();
   }
-
+  // go to profile page
+  goToProfile() {
+    this.navCtrl.push(ProfilePage).catch(err => console.log(err));
+  }
+  goToUserProfile(id: number) {
+    this.navCtrl.push(OtherUserPage, {'id' : id}).catch(err => console.log(err));
+  }
 }
