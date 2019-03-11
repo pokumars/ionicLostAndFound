@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { DropdownpagePage } from "../dropdownpage/dropdownpage";
 import {ConfirmPage} from "../confirm/confirm";
@@ -25,7 +25,8 @@ export class EditPostPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private mediaProvider: MediaProvider,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,
+              private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -48,6 +49,7 @@ export class EditPostPage {
     console.log(this.sentData);
     this.mediaProvider.editMedia(this.id,this.sentData).subscribe(res => {
       console.log(res);
+      this.presentToast();
       this.navCtrl.pop().catch(err => console.log(err));
     })
   }
@@ -75,5 +77,18 @@ export class EditPostPage {
           break;
       }
     })
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message:'Post Modified',
+      duration: 3000,
+    });
+
+    toast.onDidDismiss(()=>{
+      console.log('post modified toast');
+    });
+
+    toast.present();
   }
 }

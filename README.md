@@ -7,10 +7,10 @@
 
 <h3>Functionalities</h3>
 <ul>
-<li>upload media *</li>
-<li>browsing*, searching and viewing* media</li>
+<li>* upload media of missing item </li>
+<li>browsing*, searching and viewing* media and items that you or others lost</li>
 <li>commenting/liking media</li>
-<li>client statistics</li>
+<li>client statistics of number of found or lost media</li>
 <li>implemented using JS/HTML/CSS (angular & ionic framework)*</li>
 <li>responsive frontend*</li>
 <li>applying/extracting metadata (EXIF)</li>

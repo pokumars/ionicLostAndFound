@@ -12,9 +12,11 @@
 
   <ion-toolbar>
     <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
+      <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
       <ion-segment-button value="all">All</ion-segment-button>
-      <ion-segment-button value="lost">Lost</ion-segment-button>
-      <ion-segment-button value="found">Found</ion-segment-button>
+      <ion-segment-button value="solved">Solved</ion-segment-button>
+      <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -22,9 +24,14 @@
 
 <ion-content padding>
   <div [ngSwitch]="type">
-    <ion-list *ngSwitchCase="'all'">
+
+      <ion-list *ngSwitchCase="'all'">
+        <p>combo</p>
+
+        <ion-item *ngFor="let image of allPostArray">
+    <!-- <ion-list *ngSwitchCase="'all'">
         <p>All</p>
-        <ion-item *ngFor="let image of allPicArray | async">
+        <ion-item *ngFor="let image of allPicArray | async"> -->
           <ion-thumbnail item-start>
             <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
               [alt]="image.description" (click)="goToDetailed(image)">
@@ -63,5 +70,22 @@
               <p>{{ image.time_added | date}}</p>
             </ion-item>
           </ion-list>
+
+          <ion-list *ngSwitchCase="'solved'">
+            <!--style this card differently to show that these are solved
+            We can have lost solved as one color and found solved as another-->
+              <p>solved</p>
+              <!-- I use subscribe instead of async -->
+              <ion-item *ngFor="let image of solvedPostArray">
+                <ion-thumbnail item-start>
+                  <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+                    [alt]="image.description" (click)="goToDetailed(image)">
+                </ion-thumbnail>
+                <h1>{{ image.title }}</h1>
+                <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+                <p>{{ image.description }}</p>
+                <p>{{ image.time_added | date}}</p>
+              </ion-item>
+            </ion-list>
   </div>
 </ion-content>

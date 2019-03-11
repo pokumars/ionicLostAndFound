@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import { User } from '../../interface/user';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MediaProvider } from '../../providers/media/media';
@@ -38,7 +38,8 @@ export class ProfileEditPage {
               public navParams: NavParams,
               private authProvider: AuthProvider,
               private mediaProvider: MediaProvider,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,
+              private toastCtrl: ToastController) {
   }
   // when page is turned on
   ionViewDidLoad() {
@@ -123,7 +124,16 @@ export class ProfileEditPage {
         } else {
           this.confirmationCheck = false;
         }
+        if(this.user.password !== '') {
+          localStorage.setItem('password', this.user.password);
+        }
+        if(this.user.email !== '') {
+          localStorage.setItem('email', this.user.email);
+        }
+        this.presentToast();
+        this.navCtrl.pop().catch(err => console.log(err));
       })
+
     } else {
       this.oldPassword = '';
       this.confirmValid = false;
@@ -156,5 +166,18 @@ export class ProfileEditPage {
         }
       })
     });
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message:'Profile details changed',
+      duration: 3000,
+    });
+
+    toast.onDidDismiss(()=>{
+      console.log('user detail modified toast');
+    });
+
+    toast.present();
   }
 }
