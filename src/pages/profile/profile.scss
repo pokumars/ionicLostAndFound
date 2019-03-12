@@ -1,9 +1,28 @@
+$card-text-align: left;
 page-profile {
   ion-avatar img {
     border-radius: 50%;
     margin: auto;
   }
-  ion-content p{
-    text-align: center;
+  ion-card{
+    display: flex;
+    flex-direction: row;
+    button{
+      background-color: black;
+    }
+    div{
+      text-align: $card-text-align;
+    }
   }
+  ion-card img {
+    width: 70%;
+  }
+  .card-title{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: $card-text-align;
+  }
+  /* .card-right{
+    border-left: 1px black solid;
+  } */
 }

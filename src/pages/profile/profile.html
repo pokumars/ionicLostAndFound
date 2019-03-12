@@ -1,37 +1,34 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>profile</ion-title>
+  <ion-navbar color="bright">
+    <ion-title>Profile</ion-title>
     <ion-buttons end>
-      <button ion-button solid color="danger" (click)="onLogout()">Logout</button>
+      <button ion-button solid color="dark" (click)="onLogout()">Logout</button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
+    <div class="card-left">
+      <ion-avatar *ngIf="userId">
+          <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
+          <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
+          <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
+          <img [src]="(userId | userInfo: 'avatar': 'small' | async)" (click)="chooseNewProfile()" alt="Change your profile">
+          </ion-avatar>
+    </div>
+    <div class="card-right" >
+      <p class="card-title">{{ username }}</p>
+      <p>{{ userMail }}</p>
+      <button ion-button color="bright" (click)="editProfile()">Edit Profile</button>
+    </div>
+  </ion-card>
 
-  <ion-avatar *ngIf="userId">
-    <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
-    <!-- <img [src]="baseUrl + avatarUrl"> --> <!-- This is temporary fix for the pipe not working -->
-    <!--<img [src]="baseUrl + avatar" (click)="chooseNewProfile()">-->
-    <img [src]="(userId | userInfo: 'avatar': 'small' | async)" (click)="chooseNewProfile()" alt="Change your profile">
-  </ion-avatar>
-    <p>{{ avatar }}  </p>
-    <p>{{ username }}</p>
-    <p>{{ userMail }}</p>
-    <button ion-button (click)="editProfile()">Edit Profile</button>
-    <!--<button ion-button block [navPush]="myPosts">View my previous posts</button>-->
-  <!-- <ion-toolbar>
+  <ion-toolbar color="bright">
     <ion-segment [(ngModel)]="type">
-      <ion-segment-button value="all">All</ion-segment-button>
-      <ion-segment-button value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
-      <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
-    </ion-segment>
-  </ion-toolbar> -->
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="type">
-      <ion-segment-button value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
+      <ion-segment-button color="dark" value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
       <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
       <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button value="solved">Solved</ion-segment-button>

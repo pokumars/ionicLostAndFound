@@ -72,7 +72,6 @@ export class ProfilePage {
     this.userId = +localStorage.getItem('user_id');// the plus to convert userid to number to be used in user info pipe
     this.username = localStorage.getItem('username');
     this.userMail = localStorage.getItem('email');
-
   }
   // log user out
   onLogout(){
