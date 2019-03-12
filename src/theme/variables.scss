@@ -72,9 +72,21 @@ $popover-wp-border-radius: 3px;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-$segment-button-md-text-color-activated: #fff;
-$segment-button-md-border-color-activated:#fff;
+$segment-button-md-text-color-activated: color($colors,light);
+$segment-button-md-border-color-activated:color($colors,light);
 
+$toolbar-background: color($colors,bright);
+$toolbar-md-title-text-color: color($colors,light);
+
+
+$tabs-md-tab-text-color-active: color($colors,light);
+$tabs-md-tab-icon-color-active: color($colors,light);
+
+$tabs-md-tab-text-color: rgba(60, 60, 60, 0.7);
+$tabs-md-tab-icon-color: rgba(60, 60, 60, 0.7);
+
+
+//$tabs-md-tab-icon-color: color($colors,light);
 
 
 

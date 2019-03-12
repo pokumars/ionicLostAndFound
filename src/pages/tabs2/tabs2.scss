@@ -1,3 +1,23 @@
+$bright: #e45c29;
 page-tabs2 {
+  /* .tabs-md .tabbar{
+    background-color: $bright;
+  } */
 
+  .tabs-md .tabbar {
+    //background-color: rgb(228, 92, 41);
+    background-color: $bright;
+  }
+
+  /* .tabs-md .tab-button {
+    min-height: 5.6rem;
+    font-weight: normal;
+    color: rgba(60, 60, 60, 0.7);
+    padding: 0;
+  } */
+
+  /* .tabs-md .tab-button[aria-selected=true] {
+    color: #f4f4f4;
+    padding: 0;
+  } */
 }

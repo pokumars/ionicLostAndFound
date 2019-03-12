@@ -5,11 +5,12 @@
 
     <ion-buttons end>
       <button [navPush]="uploadPage" class="button">
-          <ion-icon large name="add"></ion-icon>
+          <ion-icon icon-only name="add"></ion-icon>
       </button>
 
       <button [navPush]="profilePage" class="button">
-        <img [src]="(userid | userInfo: 'avatar': 'medium' | async)" style="width: 32px; z-index: 3" alt="Go To Profile Page">
+          <ion-icon large name="person"></ion-icon>
+       <!-- <img [src]="(userid | userInfo: 'avatar': 'medium' | async)" style="width: 32px; z-index: 3" alt="Profile"> -->
       </button>
     </ion-buttons>
   </ion-navbar>

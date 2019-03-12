@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar color="bright">
+  <ion-navbar >
     <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button ion-button solid color="dark" (click)="onLogout()">Logout</button>
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <div class="profile-details">
     <div class="card-left">
       <ion-avatar *ngIf="userId">
           <!--This works- SCREENSHOT <img [src]="baseUrl + avatar">  -->
@@ -20,17 +20,17 @@
           </ion-avatar>
     </div>
     <div class="card-right" >
-      <p class="card-title">{{ username }}</p>
-      <p>{{ userMail }}</p>
+      <p class="card-title">myFantasyname</p>
+      <p>johndoe@somthing.com</p>
       <button ion-button color="bright" (click)="editProfile()">Edit Profile</button>
     </div>
-  </ion-card>
+  </div>
 
   <ion-toolbar color="bright">
     <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button color="dark" value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
       <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
-      <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button value="solved">Solved</ion-segment-button>
       <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->
     </ion-segment>

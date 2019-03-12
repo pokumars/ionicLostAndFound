@@ -1,28 +1,35 @@
 $card-text-align: left;
+$bright: #E45C29;
 page-profile {
+  ion-navbar{
+    background-color: #E45C29;
+  }
   ion-avatar img {
     border-radius: 50%;
     margin: auto;
   }
-  ion-card{
+  .profile-details{
     display: flex;
     flex-direction: row;
     button{
-      background-color: black;
+      background-color: color($colors, bright);
     }
     div{
       text-align: $card-text-align;
     }
   }
-  ion-card img {
+  .profile-details img {
     width: 70%;
   }
   .card-title{
     font-size: 1.5em;
     font-weight: bold;
+    margin: 10px auto;
     text-align: $card-text-align;
   }
   /* .card-right{
     border-left: 1px black solid;
   } */
+  /* color="bright" */
+
 }
