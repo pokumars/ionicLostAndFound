@@ -4,14 +4,11 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label>{{input}} this post?</ion-label>
-    </ion-item>
-    <ion-item>
-      <button ion-button (click)="confirm()">Confirm</button>
-      <button ion-button (click)="cancel()">Cancel</button>
-    </ion-item>
-  </ion-list>
+
+<ion-content class="no-scroll">
+   <h3>{{input}} this post?</h3>
+    <div class="button-container">
+      <button class="button-yes" (click)="confirm()">Confirm</button>
+      <button class="button-no" (click)="cancel()">Cancel</button>
+    </div>
 </ion-content>

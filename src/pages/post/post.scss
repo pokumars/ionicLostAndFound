@@ -1,4 +1,7 @@
 page-post {
+  .scroll-content{
+    padding: 2px;
+  }
   .menu {
     position: absolute;
     right: 12px;
@@ -59,5 +62,33 @@ page-post {
   }
   img{
     width: 90%;
+  }
+
+  .popover-menu {
+    border-radius: 3px;
+    width: 135px;
+    border: solid red 10px;
+  }
+  .image-body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
+  }
+  .info-container {
+    display: block;
+    width: 45%;
+    margin: 2.5%;
+    position: relative;
+  }
+  .img-container {
+    display: block;
+    margin: 0;
+    width: 50%;
+    img {
+      width: calc(100% - 5px);
+      margin: 5px;
+    }
   }
 }

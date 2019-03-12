@@ -29,6 +29,7 @@ export class PostPage {
   comments: Comm[] = [];
   userId: number;
   userName = '';
+  popOverStatus = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private mediaProvider: MediaProvider,
@@ -70,7 +71,7 @@ export class PostPage {
   }
   // delete comment by own user
   deleteComments(comment_id: number) {
-    this.presentConfirm('delete').then(ans => {
+    this.presentConfirm('Delete').then(ans => {
       if(ans) {
         this.mediaProvider.deleteComment(comment_id).subscribe(ans => {
           console.log(ans);
@@ -117,7 +118,7 @@ export class PostPage {
       setTimeout(() => {
         uploadSpinner.dismiss().catch(error => console.log(error));
         console.log('timeout');
-      }, 500)
+      }, 100)
     })
   }
   // refresh comments section
@@ -130,7 +131,13 @@ export class PostPage {
   // popover menu
   presentPopover(ev: any) {
     localStorage.setItem('mem', 'do nothing');
-    const popover = this.popoverController.create(DropdownpagePage,{'post_id':this.post.file_id, 'resolve_status': this.post.resolvedStatus});
+    const popover = this.popoverController.create(
+      DropdownpagePage,
+      {'post_id':this.post.file_id, 'resolve_status': this.post.resolvedStatus},
+      {
+        showBackdrop: true,
+        cssClass: 'popover-menu'
+      });
     popover.present({
       animate: true,
       ev: ev,
@@ -156,9 +163,10 @@ export class PostPage {
   // ask for user confirmation
   presentConfirm(input: string) {
     return new Promise(resolve => {
+      this.popOverStatus = true;
       const popover = this.popoverController.create(ConfirmPage,{'input': input}, {
         enableBackdropDismiss: false,
-        showBackdrop: true
+        showBackdrop: false,
       });
       popover.present({
         animate: true,
@@ -166,6 +174,7 @@ export class PostPage {
       popover.onDidDismiss(() => {
         let choice = localStorage.getItem('confirm-ask');
         console.log('user choice is:' + choice);
+        this.popOverStatus = false;
         switch (choice) {
           case 'no':
             resolve(false);

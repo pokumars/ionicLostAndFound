@@ -1,3 +1,53 @@
 page-confirm {
-
+  background: #222222;
+  .no-scroll .scroll-content{
+    overflow: hidden;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  h3 {
+    color: #FF7F21;
+    background: #222222;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+    font-size: large;
+  }
+  .button-container {
+    display: block;
+    width: 160px;
+    height: 44px;
+    margin: auto;
+    background: #222222;
+    padding: 5px;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+  }
+  .button-yes {
+    display: inline-block;
+    background: #FF7F21;
+    border-radius: 2px;
+    padding: 7px;
+    height: 30px;
+    width: 63px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+  }
+  .button-no {
+    display: inline-block;
+    background: #FF7F21;
+    border-radius: 2px;
+    padding: 7px;
+    height: 30px;
+    width: 63px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+  }
+  div {
+    background: #222222;
+  }
 }
