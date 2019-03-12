@@ -38,7 +38,13 @@ $colors: (
   secondary:  #21EAFF,
   danger:     #FF7F21,
   light:      #f4f4f4,
-  dark:       #222222
+  dark:       #222,
+  bright:     (
+    base: #E45C29,
+    contrast: #fff
+  )
+
+
 );
 
 
@@ -52,6 +58,8 @@ $colors: (
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
+$segment-button-md-text-color-activated: #fff;
+$segment-button-md-border-color-activated:#fff;
 
 
 
