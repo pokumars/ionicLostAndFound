@@ -20,8 +20,8 @@
           </ion-avatar>
     </div>
     <div class="card-right" >
-      <p class="card-title">myFantasyname</p>
-      <p>johndoe@somthing.com</p>
+      <p class="card-title">{{userId | userInfo: 'name' | async}}</p>
+      <p>{{userId | userInfo: 'email' | async}}</p>
       <button ion-button color="bright" (click)="editProfile()">Edit Profile</button>
     </div>
   </div>

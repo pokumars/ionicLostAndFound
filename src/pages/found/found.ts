@@ -96,7 +96,12 @@ export class FoundPage {
   goToProfile() {
     this.navCtrl.push(ProfilePage).catch(err => console.log(err));
   }
+  //go to others' profiles
   goToUserProfile(id: number) {
-    this.navCtrl.push(OtherUserPage, {'id' : id}).catch(err => console.log(err));
+    if(id == this.userid) {
+      this.navCtrl.push(ProfilePage).catch(err => console.log(err));
+    } else {
+      this.navCtrl.push(OtherUserPage, {'id' : id}).catch(err => console.log(err));
+    }
   }
 }

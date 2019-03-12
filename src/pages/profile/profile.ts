@@ -231,7 +231,7 @@ export class ProfilePage {
       this.solvedPostArray= this.allPostArray.filter( img => img.resolvedStatus === true);
       this.solvedPostArray = this.mediaProvider.sortMedia(this.solvedPostArray);
       console.log('A test filter for the tag', this.solvedPostArray);
-    },1500)
+    },500)
   }
 
   // go to detailed post

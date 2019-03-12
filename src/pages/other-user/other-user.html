@@ -18,23 +18,27 @@
     <h2> Found <span>{{userId | userInfo: 'found-stat' | async}}</span></h2>
     <h2> Lost <span>{{userId | userInfo: 'lost-stat' | async}}</span></h2>
   </ion-item>
-  <ion-toolbar>
-
+  <ion-toolbar color="bright">
     <ion-segment [(ngModel)]="type">
       <ion-segment-button value="all">All</ion-segment-button>
-      <ion-segment-button value="lost">Lost</ion-segment-button>
-      <ion-segment-button value="found">Found</ion-segment-button>
+      <ion-segment-button color="dark" value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
+      <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
+      <ion-segment-button value="solved">Solved</ion-segment-button>
+      <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->
     </ion-segment>
-
   </ion-toolbar>
   <div [ngSwitch]="type">
-    <ion-list *ngSwitchCase="'all'">
-      <p>All</p>
 
-      <ion-item *ngFor="let image of allPicArray | async" (click)="goToDetailed(image)">
+    <ion-list *ngSwitchCase="'all'">
+      <p>combo</p>
+
+      <ion-item *ngFor="let image of allPostArray">
+        <!-- <ion-list *ngSwitchCase="'all'">
+            <p>All</p>
+            <ion-item *ngFor="let image of allPicArray | async"> -->
         <ion-thumbnail item-start>
           <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-               [alt]="image.description">
+               [alt]="image.description" (click)="goToDetailed(image)">
         </ion-thumbnail>
         <h1>{{ image.title }}</h1>
         <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
@@ -42,15 +46,27 @@
         <p>{{ image.time_added | date}}</p>
       </ion-item>
     </ion-list>
-
-
     <ion-list  *ngSwitchCase="'lost'">
       <p>Lost</p>
       <!-- I use subscribe instead of async -->
-      <ion-item *ngFor="let image of lostPicArray" (click)="goToDetailed(image)">
+      <ion-item *ngFor="let image of lostPicArray">
         <ion-thumbnail item-start>
           <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-               [alt]="image.description">
+               [alt]="image.description" (click)="goToDetailed(image)">
+        </ion-thumbnail>
+        <h1>{{ image.title }}</h1>
+        <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
+        <p>{{ image.description }}</p>
+        <p>{{ image.time_added | date}}</p>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'found'">
+      <p>Found</p>
+      <!-- I use subscribe instead of async -->
+      <ion-item *ngFor="let image of foundPicArray">
+        <ion-thumbnail item-start>
+          <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
+               [alt]="image.description" (click)="goToDetailed(image)">
         </ion-thumbnail>
         <h1>{{ image.title }}</h1>
         <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>
@@ -59,14 +75,15 @@
       </ion-item>
     </ion-list>
 
-
-    <ion-list *ngSwitchCase="'found'">
-      <p>Found</p>
+    <ion-list *ngSwitchCase="'solved'">
+      <!--style this card differently to show that these are solved
+      We can have lost solved as one color and found solved as another-->
+      <p>solved</p>
       <!-- I use subscribe instead of async -->
-      <ion-item *ngFor="let image of foundPicArray" (click)="goToDetailed(image)">
+      <ion-item *ngFor="let image of solvedPostArray">
         <ion-thumbnail item-start>
           <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"
-               [alt]="image.description">
+               [alt]="image.description" (click)="goToDetailed(image)">
         </ion-thumbnail>
         <h1>{{ image.title }}</h1>
         <h5 style="font-size: x-small">{{image.user_id | userInfo: 'name' | async}}</h5>

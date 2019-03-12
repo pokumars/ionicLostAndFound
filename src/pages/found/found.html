@@ -24,8 +24,7 @@
   <ion-list>
     <ion-item *ngFor="let image of picArray | async"
               [ngStyle]="{'position': 'relative'}"
-              [ngClass]="image.resolvedStatus ? 'resolved-post' : 'unresolved-post'"
-    >
+              [ngClass]="image.resolvedStatus ? 'resolved-post' : 'unresolved-post'">
       <ion-thumbnail item-start>
         <div [ngClass]="image.resolvedStatus ? 'resolved-mark' : 'unresolved-mark'"></div>
         <img [src]="'http://media.mw.metropolia.fi/wbma/uploads/' + image.filename.split('.')[0] + '-tn160.png'"

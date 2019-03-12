@@ -2,44 +2,47 @@
   <ion-navbar>
   </ion-navbar>
 </ion-header>
-<ion-content *ngIf="post" style="position: relative;"
-             [ngStyle]="{'background-color': post.backgroundColor, 'color': post.color, 'position': 'relative'}"
-             [ngClass]="popOverStatus ? 'blur' : 'no-blur'">
-  <div class="image-body">
+<ion-content padding *ngIf="post" style="position: relative;"
+             [ngStyle]="{'position': 'relative'}"
+             [ngClass]="{'blur': popOverStatus, 'solved': post.resolvedStatus}">
+
+    <button *ngIf="post.user_id === userId" (click)="presentPopover($event)" class="menu">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="avatar-container">
+      <img [src]="(post.user_id | userInfo: 'avatar': 'medium' | async)" (click)="goToProfile(post.user_id)" class="avatar">
+      <div>
+        <h5 (click)="goToProfile(post.user_id)">{{ post.user_id | userInfo: 'name' | async }}</h5>
+        <p class="time">{{ post.time_added | date}}</p>
+      </div>
+    </div>
+    <div>
+      <p class="description" style="font-weight: bold">{{post.title}}</p>
+      <p class="description">{{ post.description }}</p>
+    </div>
     <div class="img-container">
+      <p class="resolve" *ngIf="post.resolvedStatus">resolved</p>
       <img [src]="(post.filename | thumbnail: 'large')" [alt]="post.title">
     </div>
-    <div class = "info-container">
-      <button *ngIf="post.user_id === userId" (click)="presentPopover($event)" class="menu">
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <div class="avatar-container">
-        <img [src]="(post.user_id | userInfo: 'avatar': 'medium' | async)" (click)="goToProfile(post.user_id)" class="avatar">
-        <h5 (click)="goToProfile(post.user_id)">{{ post.user_id | userInfo: 'name' | async }}</h5>
-      </div>
-      <h3 *ngIf="post">{{ post.title }}</h3>
-      <p class="time">{{ post.time_added | date}}</p>
-      <p class="description">{{ post.description }}</p>
-      <ion-item *ngIf="!post.resolvedStatus">
-        <ion-textarea [(ngModel)]="comment" placeholder="your comment here"></ion-textarea>
-      </ion-item>
-      <ion-item *ngIf="!post.resolvedStatus && comment!==''">
-        <button ion-button *ngIf="comment!==''" (click)="sendComment()">send</button>
-      </ion-item>
-      <ion-list *ngIf="comments.length !== 0">
-        <ion-item *ngFor="let cm of comments" style="position: relative;" [ngStyle]="{'background-color': post.backgroundColor, 'color': post.color}">
-          <img [src]="(cm.user_id | userInfo: 'avatar': 'medium' | async)" style="width: 20px;" (click)="goToProfile(cm.user_id)">
-          <button style="background-color: lightpink; color: #222222" (click)="goToProfile(cm.user_id)">{{ cm.user_id | userInfo: 'name' | async }}</button>
+    <ion-item *ngIf="!post.resolvedStatus">
+      <ion-textarea [(ngModel)]="comment" placeholder="your comment here"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="!post.resolvedStatus && comment!==''">
+      <button ion-button *ngIf="comment!==''" (click)="sendComment()">send</button>
+    </ion-item>
+
+    <ul style="list-style: none" *ngIf="comments.length !== 0" [ngClass]="{'solved': post.resolvedStatus}">
+      <li *ngFor="let cm of comments" style="position: relative;" class="item">
+        <div class="user-container">
+          <img [src]="(cm.user_id | userInfo: 'avatar': 'small' | async)" style="width: 32px;" (click)="goToProfile(cm.user_id)">
+          <button (click)="goToProfile(cm.user_id)">{{ cm.user_id | userInfo: 'name' | async }}</button>
+          <p class="time" style="font-size: 10px">{{cm.time_added | date}}</p>
+        </div>
+        <div>
           <p>{{ cm.comment }}</p>
-          <p style="font-size: 3px">{{cm.time_added}}</p>
-          <button style="position: absolute; right: 1px; top: 1px" *ngIf="(userId===cm.user_id) && (post.resolvedStatus===false)" (click)="deleteComments(cm.comment_id)">x</button>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-
-  <!--<ion-item>-->
-    <!--<h2>Comments</h2>-->
-  <!--</ion-item>-->
-
+        </div>
+        <button class = "menu" *ngIf="(userId===cm.user_id) && (post.resolvedStatus===false)" (click)="deleteComments(cm.comment_id)">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    </ul>
 </ion-content>

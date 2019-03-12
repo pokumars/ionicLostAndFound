@@ -1,16 +1,13 @@
 page-post {
-  .scroll-content{
-    padding: 2px;
-  }
   .menu {
     position: absolute;
     right: 12px;
-    top: 12px;
+    top: 5px;
     padding: 3px;
     width: 32px;
     height: 32px;
     text-align: center;
-    background: aliceblue;
+    background: white;
     color: dimgray;
   }
   .menu:hover {
@@ -32,18 +29,19 @@ page-post {
     float: left;
     margin: 5px;
     cursor: pointer;
+    width: 48px;
+    height: 48px;
   }
   .avatar-container h5 {
     display: block;
-    float: left;
     margin: 5px;
-    font-weight: lighter;
-    font-size: 15px;
+    font-weight: bold;
+    font-size: 16px;
     font-family: "Roboto", "Helvetica Neue", sans-serif;
     cursor: pointer;
+    padding-top: 3px;
   }
   .time {
-    display: block;
     color: gray;
     font-weight: lighter;
     font-size: 12px;
@@ -63,12 +61,6 @@ page-post {
   img{
     width: 90%;
   }
-
-  .popover-menu {
-    border-radius: 3px;
-    width: 135px;
-    border: solid red 10px;
-  }
   .image-body {
     width: 100%;
     display: flex;
@@ -84,11 +76,88 @@ page-post {
   }
   .img-container {
     display: block;
+    position: relative;
     margin: 0;
-    width: 50%;
+    width: 100%;
     img {
       width: calc(100% - 5px);
       margin: 5px;
+    }
+  }
+  .resolve {
+    display: block;
+    background: rgba(34, 34, 34, 0.9);
+    color: #FF7F21;
+    position: absolute;
+    top: 2%;
+    left: 0;
+    font-weight: lighter;
+    font-size: 24px;
+    font-style: italic;
+    padding: 8px 4px 8px 32px;
+  }
+  .item {
+    height: auto;
+    position: relative;
+    .menu {
+      padding: 4px;
+      font-size: 12px;
+      background: white;
+      position: absolute;
+      right: 1px;
+      top: 1px;
+      color: gray;
+    }
+    .user-container {
+      position: relative;
+      button {
+        display: block;
+        padding: 4px;
+        margin: 4px;
+        background: white;
+        color: #FF7F21;
+        font-weight: bold;
+      }
+      img {
+        display: block;
+        float: left;
+        padding: 0;
+        margin: 4px;
+        cursor: pointer;
+      }
+    }
+    p {
+      display: block;
+      float: none;
+      margin-left: 38px;
+    }
+  }
+  .solved {
+    background: #222222;
+    .menu {
+      color: #f4f4f4;
+      background: transparent;
+    }
+    .menu:hover {
+      color: #FF7F21;
+    }
+    .avatar-container h5 {
+      color: #FF7F21;
+    }
+    .description {
+      color: #f4f4f4;
+    }
+    .item {
+      background: #222222;
+      .user-container {
+        button {
+          background: #222222;
+          color: #FF7F21;
+        }
+      }
+      p {
+        color: #f4f4f4;
+      }
     }
   }
 }
