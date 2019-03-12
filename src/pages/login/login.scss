@@ -1,3 +1,4 @@
+$bright: #E45C29;
 page-login {
   //.body-background {
   //  background: #21EAFF;
@@ -8,7 +9,7 @@ page-login {
   h2 {
     text-align: center;
     font-weight: bolder;
-    color: #00A2B2;
+    color: $bright;
   }
   //
   //form {

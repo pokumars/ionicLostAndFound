@@ -28,11 +28,11 @@
       <p style="color: #ca3a11" *ngIf="!fileValid" class="error-msg"> File type not ok</p>
     </ion-item>
     <ion-item>
-      <ion-label>TITLE</ion-label>
+      <ion-label floating>Title</ion-label>
       <ion-input [(ngModel)]="title" type="text" name="title" (keyup)="checkTitle()"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>DESCRIPTION</ion-label>
+      <ion-label floating>Description</ion-label>
       <ion-textarea [(ngModel)]="description" type="text" name="description" (keyup)="checkDesc()"></ion-textarea>
     </ion-item>
     <ion-list radio-group [(ngModel)]="choice" name="choice" (ionChange)="checkChoice()">

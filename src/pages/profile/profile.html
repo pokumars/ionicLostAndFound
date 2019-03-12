@@ -20,17 +20,17 @@
           </ion-avatar>
     </div>
     <div class="card-right" >
-      <p class="card-title">{{ username }}</p>
-      <p>{{ userMail }}</p>
+      <p class="card-title">myFantasyname</p>
+      <p>johndoe@somthing.com</p>
       <button ion-button color="bright" (click)="editProfile()">Edit Profile</button>
     </div>
   </div>
 
   <ion-toolbar color="bright">
     <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button color="dark" value="lost">Lost: <span>{{ userId | userInfo: 'lost-stat' | async }}</span></ion-segment-button>
       <ion-segment-button value="found">Found:  <span>{{ userId | userInfo: 'found-stat' | async }}</span></ion-segment-button>
-      <ion-segment-button value="all">All</ion-segment-button>
       <ion-segment-button value="solved">Solved</ion-segment-button>
       <!--<ion-segment-button value="unresolved">Unsolved</ion-segment-button> -->
     </ion-segment>
