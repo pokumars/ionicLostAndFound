@@ -1,4 +1,6 @@
+$bright: #E45C29;
 page-lost {
+
   .resolve {
     display: block;
     background: rgba(34, 34, 34, 0.9);
@@ -42,13 +44,15 @@ page-lost {
     color: #FF7F21;
     background: #222222;
   }
-  .button {
+  /* it in app .scss*/
+ /*  .button {
     padding: 0;
     color: gray;
     width: 30px;
     height: 30px;
-    margin: 1px;
-  }
+    margin: 1px 10px;
+
+  } */
   .button:hover{
     color: #FF7F21;
   }

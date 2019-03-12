@@ -42,13 +42,14 @@ page-found {
     color: #00A2B2;
     background: #222222;
   }
-  .button {
+  /* it in app .scss*/
+  /* .button {
     padding: 0;
     color: gray;
     width: 30px;
     height: 30px;
     margin: 1px;
-  }
+  } */
   .button:hover{
     color: #00A2B3;
   }
