@@ -7,7 +7,7 @@ import { MediaProvider } from '../../providers/media/media';
 import { Observable } from "rxjs";
 import { Pic } from "../../interfaces/Pic";
 import { PostPage } from '../post/post';
-import {OtherUserPage} from "../other-user/other-user";
+import { OtherUserPage } from "../other-user/other-user";
 
 
 /**
@@ -27,7 +27,7 @@ export class LostPage {
   homePage = HomePage;
   lost = true;
   picArray: {};
-
+  userid: number;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -37,10 +37,12 @@ export class LostPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LostPage');
     this.getAllFile();
+    this.userid = +localStorage.getItem('user_id');
   }
 
   ionViewWillEnter() {
     this.getAllFile();
+    this.userid = +localStorage.getItem('user_id');
   }
   getAllFile() {
     if(this.lost){
@@ -58,5 +60,13 @@ export class LostPage {
     console.log(event);
     this.getAllFile();
     event.complete();
+  }
+  // go to profile page
+  goToProfile() {
+    console.log('pushing');
+    this.navCtrl.push(ProfilePage).catch(err => console.log(err));
+  }
+  goToUserProfile(id: number) {
+    this.navCtrl.push(OtherUserPage, {'id' : id}).catch(err => console.log(err));
   }
 }

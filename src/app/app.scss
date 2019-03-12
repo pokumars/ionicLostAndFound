@@ -14,3 +14,23 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+//.ion-page {
+//  background: #00A2B2;
+//}
+//@media (min-width: 567px) {
+//  .ion-content {
+//    width: 60%;
+//    background: #222222;
+//  }
+//}
+//
+///* Small devices such as phone */
+//@media (max-width: 567px) {
+//  .ion-content {
+//    width: 95%;
+//    background: #f4f4f4;
+//  }
+//}
+body {
+  background: #222222;
+}
