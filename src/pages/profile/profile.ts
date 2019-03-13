@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {App, IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {App, IonicPage, NavController, NavParams, Platform, PopoverController} from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { MediaProvider } from '../../providers/media/media';
 import {Pic, TagsResponse} from '../../interfaces/Pic';
@@ -10,6 +10,7 @@ import { LoadingController } from 'ionic-angular';
 import { MyPostsPage } from '../my-posts/my-posts';
 import {Observable} from "rxjs";
 import {PostPage} from "../post/post";
+import {ConfirmPage} from "../confirm/confirm";
 
 /**
  * Generated class for the ProfilePage page.
@@ -32,6 +33,7 @@ export class ProfilePage {
   file: File;
   isAndroid = false; isWindows = false; isImage = false;
   myPosts = MyPostsPage;
+  popOverStatus = false;
 
   // concerning the posts
   allPicArray: Observable<Pic[]>;
@@ -48,7 +50,8 @@ export class ProfilePage {
               private mediaProvider: MediaProvider,
               private chooser: Chooser,
               private loadCtrl: LoadingController,
-              private platform: Platform) {
+              private platform: Platform,
+              private popOverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
@@ -75,10 +78,14 @@ export class ProfilePage {
   }
   // log user out
   onLogout(){
-    console.log('onLogout()');
-    localStorage.clear();
-    // set root to be the login Page
-    this.app.getRootNav().setRoot(LoginPage).catch(err => console.log(err));
+    this.presentConfirm('You want to log out').then(res => {
+      if(res) {
+        console.log('onLogout()');
+        localStorage.clear();
+        // set root to be the login Page
+        this.app.getRootNav().setRoot(LoginPage).catch(err => console.log(err));
+      }
+    })
   }
   // go to edit profile page
   editProfile() {
@@ -238,73 +245,30 @@ export class ProfilePage {
   goToDetailed(post: Pic) {
     this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*
-  // getting users post
-  getAllMyPosts() {
-    // console.log('my userId >>>>>', this.userId)
-    this.allPicArray = this.mediaProvider.getUsersMedia(this.userId.toString());
-    this.allPicArray.subscribe(res => console.log('11111111',res));
-    // console.log('array==>>>', this.allPicArray)
+  // ask for user confirmation
+  presentConfirm(input: string) {
+    return new Promise(resolve => {
+      this.popOverStatus = true;
+      const popover = this.popOverCtrl.create(ConfirmPage,{'input': input}, {
+        enableBackdropDismiss: false,
+        showBackdrop: false,
+      });
+      popover.present({
+        animate: true,
+      }).catch(err => console.log(err));
+      popover.onDidDismiss(() => {
+        let choice = localStorage.getItem('confirm-ask');
+        console.log('user choice is:' + choice);
+        this.popOverStatus = false;
+        switch (choice) {
+          case 'no':
+            resolve(false);
+            break;
+          case 'yes':
+            resolve(true);
+            break;
+        }
+      })
+    });
   }
-
-  //get all lost posts of a user
-  getAllMyLost() {
-    this.mediaProvider.getAllMedia('lost').then(
-      (results: Pic[]) => {// gives all posts with lost tag
-        console.log('lost posts >>>>>>',results);
-
-        //filter that for ones that were made by this user
-        this.lostPicArray = results.filter((img) => {
-          if (img.user_id === this.userId) {
-            console.log('your lost img',img);
-            return img;
-          }
-        })
-      }
-    )
-  }
-  // get all post tagged with found
-  getAllMyFound() {
-    this.mediaProvider.getAllMedia('found').then(
-      (results: Pic[]) => {// gives all posts with found tag
-        console.log('found posts >>>>>>',results);
-
-        //filter that for ones that were made by this user
-        this.foundPicArray = results.filter((img) => {
-          if (img.user_id === this.userId) {
-            console.log('your found img',img);
-            return img;
-          }
-        });
-
-      }
-    );
-  }
-  // go to detailed post
-  goToDetailed(post: Pic) {
-    this.navCtrl.push(PostPage,{'post': post}).catch(err => console.log(err));
-  } */
-  // check if user already have avatar
 }

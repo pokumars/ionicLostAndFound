@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import { DropdownpagePage } from "../dropdownpage/dropdownpage";
-import {ConfirmPage} from "../confirm/confirm";
+import { ConfirmPage } from "../confirm/confirm";
 
 /**
  * Generated class for the EditPostPage page.
@@ -21,6 +21,7 @@ export class EditPostPage {
   formValid = false;
   title = '';
   description = '';
+  popOverStatus = false;
   id: number = this.navParams.get('file_id');
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -59,6 +60,7 @@ export class EditPostPage {
   }
   // ask for user confirmation
   presentPopover(ev: any) {
+    this.popOverStatus = true;
     const popover = this.popoverCtrl.create(ConfirmPage,{'input': 'Edit'}, {
       enableBackdropDismiss: false,
       showBackdrop: true
@@ -67,6 +69,7 @@ export class EditPostPage {
       animate: true,
     }).catch(err => console.log(err));
     popover.onDidDismiss(() => {
+      this.popOverStatus = false;
       let choice = localStorage.getItem('confirm-ask');
       console.log('user choice is:' + choice);
       switch (choice) {
@@ -78,17 +81,15 @@ export class EditPostPage {
       }
     })
   }
-
+  // present toast
   presentToast() {
     let toast = this.toastCtrl.create({
       message:'Post Modified',
       duration: 3000,
     });
-
     toast.onDidDismiss(()=>{
       console.log('post modified toast');
     });
-
     toast.present();
   }
 }

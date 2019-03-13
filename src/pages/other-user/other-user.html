@@ -6,7 +6,6 @@
 -->
 <ion-header>
   <ion-navbar color="bright">
-    <ion-title>profile</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -30,8 +29,6 @@
   <div [ngSwitch]="type">
 
     <ion-list *ngSwitchCase="'all'">
-      <p>combo</p>
-
       <ion-item *ngFor="let image of allPostArray">
         <!-- <ion-list *ngSwitchCase="'all'">
             <p>All</p>
@@ -47,7 +44,6 @@
       </ion-item>
     </ion-list>
     <ion-list  *ngSwitchCase="'lost'">
-      <p>Lost</p>
       <!-- I use subscribe instead of async -->
       <ion-item *ngFor="let image of lostPicArray">
         <ion-thumbnail item-start>
@@ -61,7 +57,6 @@
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'found'">
-      <p>Found</p>
       <!-- I use subscribe instead of async -->
       <ion-item *ngFor="let image of foundPicArray">
         <ion-thumbnail item-start>
@@ -78,7 +73,6 @@
     <ion-list *ngSwitchCase="'solved'">
       <!--style this card differently to show that these are solved
       We can have lost solved as one color and found solved as another-->
-      <p>solved</p>
       <!-- I use subscribe instead of async -->
       <ion-item *ngFor="let image of solvedPostArray">
         <ion-thumbnail item-start>

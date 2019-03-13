@@ -32,6 +32,7 @@ export class ProfileEditPage {
   confirmationCheck = false;
   confirmValid = false;
   oldPassword = '';
+  popOverStatus = false;
   @ViewChild('trydis') passwordInput: ElementRef;
 
   constructor(public navCtrl: NavController,
@@ -119,7 +120,7 @@ export class ProfileEditPage {
             if(this.user.email !== '') {
               localStorage.setItem('email', this.user.email);
             }
-            this.navCtrl.pop().catch(err => console.log(err));
+            // this.navCtrl.pop().catch(err => console.log(err));
           })
         } else {
           this.confirmationCheck = false;
@@ -145,6 +146,7 @@ export class ProfileEditPage {
   }
   // ask for user confirmation
   presentConfirm(input: string) {
+    this.popOverStatus = true;
     return new Promise(resolve => {
       const popover = this.popoverCtrl.create(ConfirmPage,{'input': input}, {
         enableBackdropDismiss: false,
@@ -154,6 +156,7 @@ export class ProfileEditPage {
         animate: true,
       }).catch(err => console.log(err));
       popover.onDidDismiss(() => {
+        this.popOverStatus = false;
         let choice = localStorage.getItem('confirm-ask');
         console.log('user choice is:' + choice);
         switch (choice) {
@@ -177,7 +180,8 @@ export class ProfileEditPage {
     toast.onDidDismiss(()=>{
       console.log('user detail modified toast');
     });
+    toast.present().then(() => {
 
-    toast.present();
+    });
   }
 }
