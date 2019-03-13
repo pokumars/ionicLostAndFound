@@ -18,10 +18,8 @@
       <ion-input type="file" (change)="checkFile($event)"></ion-input>
     </ion-item>
     <ion-item *ngIf="isAndroid">
-      <button type="button" (click)="choose()">Choose</button>
-    </ion-item>
-    <ion-item *ngIf="isAndroid">
-      <button type="button" (click)="takePic()">Take pic</button>
+      <button  ion-button color="bright" type="button" (click)="choose()">Choose from Gallery</button>
+      <button ion-button color="bright" type="button" (click)="takePic()">Take photo</button>
     </ion-item>
     <ion-item *ngIf="fileInput">
       <p style="color: #32db64" *ngIf="fileValid" class="error-msg"> File ok</p>
