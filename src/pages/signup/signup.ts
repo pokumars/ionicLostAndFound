@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { User } from "../../interface/user";
 import { TabspagePage } from "../tabspage/tabspage";
+import {Tabs2Page} from "../tabs2/tabs2";
 
 
 /**
@@ -49,7 +50,7 @@ export class SignUpPage {
           localStorage.setItem('email', response.user.email);
           localStorage.setItem('user_id', response.user.user_id.toString());
           console.log('uhuh!!!!');
-          this.navCtrl.setRoot(TabspagePage).catch((err)=>{
+          this.navCtrl.setRoot(Tabs2Page).catch((err)=>{
             console.log(err)
           });
         } else {
