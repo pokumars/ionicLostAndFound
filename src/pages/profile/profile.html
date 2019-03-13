@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [ngClass]="{'blur': popOverStatus}">
 
   <ion-navbar >
     <ion-title>Profile</ion-title>
@@ -9,7 +9,7 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding [ngClass]="{'blur': popOverStatus}">
   <div class="profile-details">
     <div class="card-left">
       <ion-avatar *ngIf="userId">
