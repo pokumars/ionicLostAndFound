@@ -5,13 +5,6 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { MediaProvider } from '../../providers/media/media';
 import {ConfirmPage} from "../confirm/confirm";
 
-/**
- * Generated class for the ProfileEditPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-profile-edit',
