@@ -27,7 +27,7 @@ export class LoginPage {
   // In next update
   // add smth that lets user know that the password/email is wrong
   onLogin(form) {
-    console.log(form.value);
+    // console.log(form.value);
     this.authProvider.login(form.value.username, form.value.password)
     .subscribe((response: LoginResponse) => {
       // successful login. Store token, user id, email and username
