@@ -2,6 +2,8 @@
 <h2>Project: Lost & Found App</h2>
 <p>16 March 2019</p>
 
+<a href="https://github.com/pokumars/ionicLostAndFound/raw/master/lostAndFound.apk">Download app for android</a>
+
 <h4>implemented using Javascript/HTML/CSS</h4>
 <h4>Angular & Ionic framework</h4>
 
@@ -18,6 +20,14 @@
 <li>user registration and authentication*</li>
 </ul>
 
+<h3>Download & install</h3>
+<a href="https://github.com/pokumars/ionicLostAndFound/raw/master/lostAndFound.apk">Download app for android</a>
+<p>after downloading, install it on your phone to try it out. <br>
+If the installation is blocked, change your phone settings to allow installs from unknown sources.<br>
+settings -> security -> set "unknown sources" to on and try install again</p>
+
+
+<h2>Preview</h2>
 
 | lost Page | click Tab->Found page |
 |------------|-------------| 
