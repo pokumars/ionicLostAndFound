@@ -27,9 +27,15 @@ If the installation is blocked, change your phone settings to allow installs fro
 settings -> security -> set "unknown sources" to on and try install again</p>
 
 
+
+
+
+
+
+
 <h2>Preview</h2>
 
-| lost Page | click Tab->Found page |
+| lost Page   | click Tab->Found page |
 |------------|-------------| 
 |  ![lostPage](https://user-images.githubusercontent.com/33485810/54476648-7ae0c580-4808-11e9-98bd-ad925f77e0fb.gif)|![foundPage and clickTab-xs](https://user-images.githubusercontent.com/33485810/54476652-91871c80-4808-11e9-9483-88269a83f3d7.gif) |
 
